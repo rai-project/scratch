@@ -23,15 +23,30 @@ func main() {
 		config.DebugMode(true),
 	)
 
+	term.SetRawTerminal(os.Stdin.Fd())
+	term.SetRawTerminal(os.Stdout.Fd())
+	term.SetRawTerminal(os.Stderr.Fd())
+
 	sstdin, sstdout, sstderr := term.StdStreams()
+
+	// p, tty, err := pty.Open()
+	// pp.Println(err)
+	// if err == nil {
+	// 	sstdout = tty
+	// 	sstderr = tty
+	// 	sstdin = tty
+	// 	defer tty.Close()
+	// 	defer p.Close()
+	// }
 
 	stdout := command.NewOutStream(sstdout)
 	stderr := command.NewOutStream(sstderr)
+	stdin := command.NewInStream(sstdin)
 
 	dockerClient, err := docker.NewClient(
 		docker.Stdout(stdout),
 		docker.Stderr(stderr),
-		docker.Stdin(sstdin),
+		docker.Stdin(stdin),
 	)
 	if err != nil {
 		log.WithError(err).Fatal("cannot create docker client")
@@ -59,27 +74,28 @@ func main() {
 	sigc := container.ForwardAllSignals()
 	defer signal.StopCatch(sigc)
 
-	container.MonitorTtySize()
-
 	if err := container.Start(); err != nil {
 		log.WithError(err).WithField("image", ImageName).Fatal("unable to start container")
 	}
+	container.MonitorTtySize()
 
-	cmd := "/bin/bash"
-	exec, err := docker.NewExecutionFromString(container, cmd)
-	if err != nil {
-		log.WithError(err).WithField("cmd", cmd).Fatal("unable to create docker execution")
-	}
+	// cmd := "/bin/sh"
+	// exec, err := docker.NewExecutionFromString(container, cmd)
+	// if err != nil {
+	// 	log.WithError(err).WithField("cmd", cmd).Fatal("unable to create docker execution")
+	// }
 
-	exec.Stdin = os.Stdin
-	exec.Stderr = stderr
-	exec.Stdout = stdout
+	// exec.Stdin = os.Stdin
+	// exec.Stderr = stderr
+	// exec.Stdout = stdout
 
-	exec.MonitorTtySize()
+	// exec.MonitorTtySize()
 
-	if err := exec.Run(); err != nil {
-		log.WithError(err).WithField("cmd", cmd).Fatal("unable to create docker execution")
-	}
+	// if err := exec.Run(); err != nil {
+	// 	log.WithError(err).WithField("cmd", cmd).Fatal("unable to create docker execution")
+	// }
+
+	container.Attach()
 
 	// death := death.NewDeath(syscall.SIGINT, syscall.SIGTERM)
 
