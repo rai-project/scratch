@@ -2,13 +2,14 @@ package main
 
 import (
 	"os"
-	"syscall"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/docker/cli/command"
+	"github.com/docker/docker/pkg/signal"
+	"github.com/docker/docker/pkg/term"
 	"github.com/rai-project/config"
 	"github.com/rai-project/docker"
 	"github.com/rai-project/logger"
-	"github.com/vrecan/death"
 )
 
 var (
@@ -22,10 +23,15 @@ func main() {
 		config.DebugMode(true),
 	)
 
+	sstdin, sstdout, sstderr := term.StdStreams()
+
+	stdout := command.NewOutStream(sstdout)
+	stderr := command.NewOutStream(sstderr)
+
 	dockerClient, err := docker.NewClient(
-		docker.Stdout(os.Stdout),
-		docker.Stderr(os.Stderr),
-		docker.Stdin(os.Stdin),
+		docker.Stdout(stdout),
+		docker.Stderr(stderr),
+		docker.Stdin(sstdin),
 	)
 	if err != nil {
 		log.WithError(err).Fatal("cannot create docker client")
@@ -50,6 +56,11 @@ func main() {
 	}
 	defer container.Stop()
 
+	sigc := container.ForwardAllSignals()
+	defer signal.StopCatch(sigc)
+
+	container.MonitorTtySize()
+
 	if err := container.Start(); err != nil {
 		log.WithError(err).WithField("image", ImageName).Fatal("unable to start container")
 	}
@@ -61,16 +72,18 @@ func main() {
 	}
 
 	exec.Stdin = os.Stdin
-	exec.Stderr = os.Stderr
-	exec.Stdout = os.Stdout
+	exec.Stderr = stderr
+	exec.Stdout = stdout
+
+	exec.MonitorTtySize()
 
 	if err := exec.Run(); err != nil {
 		log.WithError(err).WithField("cmd", cmd).Fatal("unable to create docker execution")
 	}
 
-	death := death.NewDeath(syscall.SIGINT, syscall.SIGTERM)
+	// death := death.NewDeath(syscall.SIGINT, syscall.SIGTERM)
 
-	death.WaitForDeath()
+	// death.WaitForDeath()
 }
 
 func init() {
