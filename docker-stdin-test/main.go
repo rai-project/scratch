@@ -1,8 +1,6 @@
 package main
 
 import (
-	"os"
-
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/cli/command"
 	"github.com/docker/docker/pkg/signal"
@@ -23,9 +21,28 @@ func main() {
 		config.DebugMode(true),
 	)
 
-	term.SetRawTerminal(os.Stdin.Fd())
-	term.SetRawTerminal(os.Stdout.Fd())
-	term.SetRawTerminal(os.Stderr.Fd())
+	// _, err := term.SetRawTerminal(os.Stdin.Fd())
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// _, err := term.SetRawTerminal(os.Stdout.Fd())
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// _, err = term.SetRawTerminal(os.Stderr.Fd())
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// if term.IsTerminal(os.Stdin.Fd()) {
+	// 	fmt.Println("stdin is a term")
+	// 	state, err := term.SaveState(os.Stdin.Fd())
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// 	term.DisableEcho(os.Stdin.Fd(), state)
+	// 	defer term.RestoreTerminal(os.Stdin.Fd(), state)
+	// }
 
 	sstdin, sstdout, sstderr := term.StdStreams()
 
@@ -42,6 +59,19 @@ func main() {
 	stdout := command.NewOutStream(sstdout)
 	stderr := command.NewOutStream(sstderr)
 	stdin := command.NewInStream(sstdin)
+	// defer func() {
+	// 	fmt.Println("Restoring stdin")
+	// 	stdin.RestoreTerminal()
+	// 	stdin.Close()
+	// }()
+	// defer func() {
+	// 	fmt.Println("Restoring stdout")
+	// 	stdout.RestoreTerminal()
+	// }()
+	// defer func() {
+	// 	fmt.Println("Restoring stderr")
+	// 	stderr.RestoreTerminal()
+	// }()
 
 	dockerClient, err := docker.NewClient(
 		docker.Stdout(stdout),
@@ -63,6 +93,7 @@ func main() {
 		docker.AddVolume("/src"),
 		docker.AddVolume("/build"),
 		docker.WorkingDirectory("/"),
+		docker.Tty(true /*default*/),
 	}
 
 	container, err := docker.NewContainer(dockerClient, containerOpts...)
@@ -77,7 +108,14 @@ func main() {
 	if err := container.Start(); err != nil {
 		log.WithError(err).WithField("image", ImageName).Fatal("unable to start container")
 	}
-	container.MonitorTtySize()
+
+	// height, width := stdout.GetTtySize()
+	// options := types.ResizeOptions{
+	// 	Height: height + 1,
+	// 	Width:  width + 1,
+	// }
+	// err = dockerClient.ContainerResize(context.Background(), container.ID, options)
+	// container.MonitorTtySize()
 
 	// cmd := "/bin/sh"
 	// exec, err := docker.NewExecutionFromString(container, cmd)
