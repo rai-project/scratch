@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/Sirupsen/logrus"
-	"github.com/moby/moby/cli/command"
-	"github.com/moby/moby/pkg/signal"
-	"github.com/moby/moby/pkg/term"
+	"github.com/docker/docker/cli/command"
+	"github.com/docker/docker/pkg/signal"
+	"github.com/docker/docker/pkg/term"
 	"github.com/rai-project/config"
 	"github.com/rai-project/docker"
 	"github.com/rai-project/logger"
