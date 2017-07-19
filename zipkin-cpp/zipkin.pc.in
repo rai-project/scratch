@@ -1,0 +1,11 @@
+prefix=@PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: zipkin
+Description: Zipkin tracing library for C/C++
+Version: @VERSION@
+Libs: -L${libdir} -lzipkin
+Libs.private: -lc++ -lboost_system
+Cflags: -I${includedir} -std=c++11

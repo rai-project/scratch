@@ -1,0 +1,108 @@
+sudo: required
+
+dist: trusty
+
+addons:
+    apt:
+        packages: &default_packages
+            - autoconf
+            - automake
+            - binutils-dev
+            - bison
+            - build-essential
+            - flex
+            - libboost-all-dev
+            - libc++-dev
+            - libcurl4-openssl-dev
+            - libdouble-conversion-dev
+            - libdwarf-dev
+            - libelf-dev
+            - libevent-dev
+            - libgflags-dev
+            - libgoogle-glog-dev
+            - libiberty-dev
+            - libjemalloc-dev
+            - liblz4-dev
+            - liblzma-dev
+            - libsnappy-dev
+            - libssl-dev
+            - libtool
+            - libunwind8-dev
+            - make
+            - pkg-config
+            - thrift-compiler
+            - tree
+            - zlib1g-dev
+        sources: &sources
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.5
+            - llvm-toolchain-precise-3.6
+            - llvm-toolchain-precise-3.7
+            - llvm-toolchain-precise-3.8
+            - llvm-toolchain-precise
+
+language: cpp
+
+cache:
+    directories:
+        - cmake-$CMAKE_VERSION-Linux-x86_64
+
+python:
+    - "2.7"
+
+env:
+    global:
+        - CMAKE_VERSION=3.8.2
+
+matrix:
+    fast_finish: true
+    include:
+        -
+            os: osx
+            osx_image: xcode8
+
+        -
+            os: linux
+            addons:
+                apt:
+                    sources: *sources
+                    packages:
+                        - *default_packages
+                        - g++-5
+            env:
+                - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
+
+        # -
+        #     os: linux
+        #     addons:
+        #         apt:
+        #             sources: *sources
+        #             packages:
+        #                 - *default_packages
+        #                 - clang-3.8
+        #     env:
+        #         - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8 && CMAKE_CXX_FLAGS=-stdlib=libc++"
+
+before_script:
+    - .travis/install-dependencies.sh
+
+before_install:
+    - eval "${MATRIX_EVAL}"
+
+script:
+    - which $CC
+    - which $CXX
+    - $CC --version
+    - $CXX --version
+    - mkdir build && cd build && rm -rf *
+    - echo travis_fold:start:cmake CMake configure
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ../cmake-$CMAKE_VERSION-Linux-x86_64/bin/cmake .. ;fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cmake .. -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl ;fi
+    - echo travis_fold:end:cmake
+    - make && make test
+
+after_failure:
+    - echo `pwd`
+    - cat externals/src/Folly/folly/config.log
+    - cat externals/src/Thrift/config.log
+    - tree -h
