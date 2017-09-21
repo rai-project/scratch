@@ -40,19 +40,33 @@ googleapis:
 	git clone --depth=1 https://github.com/googleapis/googleapis
 	cd googleapis && \
 	make && \
-	mv gens $(CURDIR)/gens && \
+	mv gens/google $(CURDIR)/gens/ && \
 	cd .. && \
 	rm -fr googleapis
 
+gogo1:
+	mkdir -p $(CURDIR)/gens
+	rm -fr $(CURDIR)/gens/gogo
+	git clone --depth=1 https://github.com/gogo/protobuf gogoprotobuf
+	cd gogoprotobuf && \
+	$(PROTOC) --cpp_out=$(CURDIR)/gens gogoproto/gogo.proto && \
+	cd .. && \
+	rm -fr gogoprotobuf
+
+gogo:
+	mkdir -p $(CURDIR)/gens
+	rm -fr $(CURDIR)/gens/gogo
+	$(PROTOC) --cpp_out=$(CURDIR)/gens -I$(GOPATH)/src github.com/gogo/protobuf/gogoproto/gogo.proto
+
 .PRECIOUS: $(TARGET_DIR)/%.grpc.pb.cc
 $(TARGET_DIR)/%.grpc.pb.cc: ../predictor.proto
-	$(PROTOC) --grpc_out=$(TARGET_DIR) --plugin=protoc-gen-grpc=$(GRPC_CPP_PLUGIN_PATH) $<
+	$(PROTOC) --grpc_out=$(TARGET_DIR) -I$(CURDIR) --plugin=protoc-gen-grpc=$(GRPC_CPP_PLUGIN_PATH) $<
 
 .PRECIOUS: $(TARGET_DIR)/%.pb.cc
 $(TARGET_DIR)/%.pb.cc: ../predictor.proto
 	mkdir -p $(TARGET_DIR)
 	$(PROTOC) --cpp_out=$(TARGET_DIR) \
-	-I../ \
+	-I$(CURDIR) \
 	-I$(GOPATH)/src \
 	-I$(GOPATH)/src/github.com/golang/protobuf/proto \
 	-I$(GOPATH)/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
