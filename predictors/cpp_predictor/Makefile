@@ -11,6 +11,7 @@
 CXX = g++
 TARGET_DIR = $(CURDIR)/src
 
+CPPFLAGS += `pkg-config --cflags protobuf grpc`
 CPPFLAGS += -I/usr/local/include -I $(TARGET_DIR) -I $(CURDIR)/gens -pthread
 CXXFLAGS += -std=c++11
 
@@ -44,31 +45,35 @@ googleapis:
 	cd .. && \
 	rm -fr googleapis
 
-gogo1:
-	mkdir -p $(CURDIR)/gens
-	rm -fr $(CURDIR)/gens/gogo
-	git clone --depth=1 https://github.com/gogo/protobuf gogoprotobuf
-	cd gogoprotobuf && \
-	$(PROTOC) --cpp_out=$(CURDIR)/gens gogoproto/gogo.proto && \
-	cd .. && \
-	rm -fr gogoprotobuf
-
 gogo:
 	mkdir -p $(CURDIR)/gens
 	rm -fr $(CURDIR)/gens/gogo
 	$(PROTOC) --cpp_out=$(CURDIR)/gens -I$(GOPATH)/src github.com/gogo/protobuf/gogoproto/gogo.proto
 
+deps:
+	go get -d github.com/googleapis/googleapis
+	go get -d github.com/gogo/protobuf
+
 .PRECIOUS: $(TARGET_DIR)/%.grpc.pb.cc
 $(TARGET_DIR)/%.grpc.pb.cc: ../predictor.proto
-	$(PROTOC) --grpc_out=$(TARGET_DIR) -I$(CURDIR) --plugin=protoc-gen-grpc=$(GRPC_CPP_PLUGIN_PATH) $<
+	$(PROTOC) --grpc_out=$(TARGET_DIR) \
+  --plugin=protoc-gen-grpc=$(GRPC_CPP_PLUGIN_PATH) \
+  -I.. \
+	-I$(CURDIR) \
+	-I$(GOPATH)/src \
+	-I$(GOPATH)/src/github.com/golang/protobuf/proto \
+	-I$(GOPATH)/src/github.com/googleapis/googleapis \
+  $<
 
 .PRECIOUS: $(TARGET_DIR)/%.pb.cc
 $(TARGET_DIR)/%.pb.cc: ../predictor.proto
 	mkdir -p $(TARGET_DIR)
 	$(PROTOC) --cpp_out=$(TARGET_DIR) \
+  -I.. \
 	-I$(CURDIR) \
 	-I$(GOPATH)/src \
 	-I$(GOPATH)/src/github.com/golang/protobuf/proto \
+	-I$(GOPATH)/src/github.com/googleapis/googleapis \
 	-I$(GOPATH)/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 	$<
 
