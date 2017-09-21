@@ -23,10 +23,26 @@ endef
 export PRINT_HELP_PYSCRIPT
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
 
+PROTOC = protoc
+GRPC_PYTHON_PLUGIN = grpc_python_plugin
+GRPC_PYTHON_PLUGIN_PATH ?= `which $(GRPC_PYTHON_PLUGIN)`
+
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
+
+
+predictor_pb2.py: ../predictor.proto ## Rule for producing the Python protobuf bindings
+	mkdir -p predictor
+	python3 -m grpc_tools.protoc \
+		--python_out=predictor \
+		--grpc_python_out=predictor \
+		-I.. \
+		-I$(GOPATH)/src \
+		-I$(GOPATH)/src/github.com/golang/protobuf/proto \
+		-I$(GOPATH)/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+		$<
 
 
 clean-build: ## remove build artifacts
@@ -52,7 +68,7 @@ lint: ## check style with flake8
 
 test: ## run tests quickly with the default Python
 	py.test
-	
+
 
 test-all: ## run tests on every Python version with tox
 	tox
