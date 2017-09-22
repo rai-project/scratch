@@ -23,6 +23,8 @@ option (gogoproto.marshaler_all) = true;
 option (gogoproto.sizer_all) = true;
 option (gogoproto.unmarshaler_all) = true;
 
+option cc_enable_arenas = true;
+
 option go_package = "predictor";
 
 message ErrorStatus {

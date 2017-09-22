@@ -11,6 +11,7 @@
 #include "google/api/http.pb.cc"
 
 #include "predictor.grpc.pb.h"
+#include "utils.hpp"
 
 // Implementation of the Predictor service. We have to implement all of the
 // service's methods - these will be invoked by the running gRPC server.
@@ -23,8 +24,8 @@ public:
        ::carml::org::predictor::Predictor *response) {
     (void)context;
     (void)request;
-    (void)response;
-    return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    response->set_id(uuid4());
+    return ::grpc::Status::OK;
   }
 
   ::grpc::Status
@@ -32,9 +33,9 @@ public:
         const ::carml::org::predictor::Predictor *request,
         ::carml::org::predictor::PredictorCloseResponse *response) {
     (void)context;
-    (void)request;
+    const auto id = request->id();
     (void)response;
-    return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    return ::grpc::Status::OK;
   }
 
   ::grpc::Status URLs(::grpc::ServerContext *context,

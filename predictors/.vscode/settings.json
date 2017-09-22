@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "*.mc": "cpp",
+        "*.cu": "cpp",
+        "*.m": "mathematica",
+        "*.mt": "mathematica",
+        "functional": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "system_error": "cpp",
+        "iosfwd": "cpp",
+        "iomanip": "cpp",
+        "thread": "cpp"
+    }
+}

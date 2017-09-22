@@ -1,0 +1,70 @@
+{
+  "name": "nodejs-predictor",
+  "version": "0.0.0-development",
+  "description": "example predictor in nodejs",
+  "preferGlobal": true,
+  "license": "MIT",
+  "author": {
+    "name": "Abdul Dakkak",
+    "email": "dakkak@illinois.edu",
+    "url": ""
+  },
+  "repository": "https://github.com/abduld/nodejs-predictor",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "start": "nps --no-scripts",
+    "precommit": "remove-lockfiles && lint-staged",
+    "test": "nps test"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "all-contributors-cli": "^4.4.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-flow": "^6.23.0",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
+    "eslint": "^4.7.0",
+    "eslint-config-airbnb-base": "12.0.0",
+    "eslint-plugin-flowtype": "^2.35.1",
+    "eslint-plugin-import": "2.7.0",
+    "flow-bin": "^0.54.1",
+    "flow-typed": "^2.1.5",
+    "husky": "^0.14.3",
+    "jest": "^21.1.0",
+    "lint-staged": "^4.2.1",
+    "nps": "^5.7.1",
+    "nps-utils": "^1.3.0",
+    "prettier": "^1.7.0",
+    "remove-lockfiles": "^1.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier --trailing-comma es5 --single-quote --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "keywords": [
+    "🐰"
+  ]
+}

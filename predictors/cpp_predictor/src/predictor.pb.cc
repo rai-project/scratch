@@ -517,12 +517,12 @@ void AddDescriptorsImpl() {
       "\002\037\"\032/v1/predict/stream/dataset:\001*0\001\022l\n\005R"
       "eset\022!.carml.org.predictor.ResetRequest\032"
       "\".carml.org.predictor.ResetResponse\"\034\202\323\344"
-      "\223\002\026\"\021/v1/predict/reset:\001*B;Z\tpredictor\300\343"
-      "\036\001\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\300\342\036\001\310\342\036\001\340\342"
-      "\036\001\320\342\036\001b\006proto3"
+      "\223\002\026\"\021/v1/predict/reset:\001*B>Z\tpredictor\370\001"
+      "\001\300\343\036\001\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\300\342\036\001\310\342\036"
+      "\001\340\342\036\001\320\342\036\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 4374);
+      descriptor, 4377);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "predictor.proto", &protobuf_RegisterTypes);
   ::google::api::protobuf_google_2fapi_2fannotations_2eproto::AddDescriptors();
@@ -559,6 +559,14 @@ ErrorStatus::ErrorStatus()
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.ErrorStatus)
 }
+ErrorStatus::ErrorStatus(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.ErrorStatus)
+}
 ErrorStatus::ErrorStatus(const ErrorStatus& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -566,7 +574,8 @@ ErrorStatus::ErrorStatus(const ErrorStatus& from)
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   message_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.message().size() > 0) {
-    message_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.message_);
+    message_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.message(),
+      GetArenaNoVirtual());
   }
   ok_ = from.ok_;
   // @@protoc_insertion_point(copy_constructor:carml.org.predictor.ErrorStatus)
@@ -584,9 +593,21 @@ ErrorStatus::~ErrorStatus() {
 }
 
 void ErrorStatus::SharedDtor() {
-  message_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  message_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
 }
 
+void ErrorStatus::ArenaDtor(void* object) {
+  ErrorStatus* _this = reinterpret_cast< ErrorStatus* >(object);
+  (void)_this;
+}
+void ErrorStatus::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void ErrorStatus::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -603,11 +624,7 @@ const ErrorStatus& ErrorStatus::default_instance() {
 }
 
 ErrorStatus* ErrorStatus::New(::google::protobuf::Arena* arena) const {
-  ErrorStatus* n = new ErrorStatus;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<ErrorStatus>(arena);
 }
 
 void ErrorStatus::Clear() {
@@ -616,7 +633,7 @@ void ErrorStatus::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  message_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   ok_ = false;
   _internal_metadata_.Clear();
 }
@@ -791,8 +808,7 @@ void ErrorStatus::MergeFrom(const ErrorStatus& from) {
   (void) cached_has_bits;
 
   if (from.message().size() > 0) {
-
-    message_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.message_);
+    set_message(from.message());
   }
   if (from.ok() != 0) {
     set_ok(from.ok());
@@ -819,6 +835,21 @@ bool ErrorStatus::IsInitialized() const {
 
 void ErrorStatus::Swap(ErrorStatus* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    ErrorStatus* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void ErrorStatus::UnsafeArenaSwap(ErrorStatus* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void ErrorStatus::InternalSwap(ErrorStatus* other) {
@@ -853,46 +884,55 @@ void ErrorStatus::set_ok(bool value) {
 
 // string message = 2 [(.gogoproto.moretags) = "yaml:\"message,omitempty\""];
 void ErrorStatus::clear_message() {
-  message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  message_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& ErrorStatus::message() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.ErrorStatus.message)
-  return message_.GetNoArena();
+  return message_.Get();
 }
 void ErrorStatus::set_message(const ::std::string& value) {
   
-  message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  message_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.ErrorStatus.message)
 }
 #if LANG_CXX11
 void ErrorStatus::set_message(::std::string&& value) {
   
-  message_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  message_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.ErrorStatus.message)
 }
 #endif
 void ErrorStatus::set_message(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  message_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.ErrorStatus.message)
 }
-void ErrorStatus::set_message(const char* value, size_t size) {
+void ErrorStatus::set_message(const char* value,
+    size_t size) {
   
-  message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  message_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.ErrorStatus.message)
 }
 ::std::string* ErrorStatus::mutable_message() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.ErrorStatus.message)
-  return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return message_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* ErrorStatus::release_message() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.ErrorStatus.message)
   
-  return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return message_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* ErrorStatus::unsafe_arena_release_message() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.ErrorStatus.message)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return message_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void ErrorStatus::set_allocated_message(::std::string* message) {
   if (message != NULL) {
@@ -900,8 +940,21 @@ void ErrorStatus::set_allocated_message(::std::string* message) {
   } else {
     
   }
-  message_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), message);
+  message_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), message,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.ErrorStatus.message)
+}
+void ErrorStatus::unsafe_arena_set_allocated_message(
+    ::std::string* message) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (message != NULL) {
+    
+  } else {
+    
+  }
+  message_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      message, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.ErrorStatus.message)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -923,6 +976,14 @@ PredictorOpenRequest::PredictorOpenRequest()
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.PredictorOpenRequest)
 }
+PredictorOpenRequest::PredictorOpenRequest(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.PredictorOpenRequest)
+}
 PredictorOpenRequest::PredictorOpenRequest(const PredictorOpenRequest& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -930,19 +991,23 @@ PredictorOpenRequest::PredictorOpenRequest(const PredictorOpenRequest& from)
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   model_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.model_name().size() > 0) {
-    model_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.model_name_);
+    model_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.model_name(),
+      GetArenaNoVirtual());
   }
   model_version_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.model_version().size() > 0) {
-    model_version_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.model_version_);
+    model_version_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.model_version(),
+      GetArenaNoVirtual());
   }
   framework_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.framework_name().size() > 0) {
-    framework_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.framework_name_);
+    framework_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.framework_name(),
+      GetArenaNoVirtual());
   }
   framework_version_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.framework_version().size() > 0) {
-    framework_version_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.framework_version_);
+    framework_version_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.framework_version(),
+      GetArenaNoVirtual());
   }
   // @@protoc_insertion_point(copy_constructor:carml.org.predictor.PredictorOpenRequest)
 }
@@ -961,12 +1026,24 @@ PredictorOpenRequest::~PredictorOpenRequest() {
 }
 
 void PredictorOpenRequest::SharedDtor() {
-  model_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  model_version_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  framework_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  framework_version_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  model_name_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
+  model_version_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
+  framework_name_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
+  framework_version_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
 }
 
+void PredictorOpenRequest::ArenaDtor(void* object) {
+  PredictorOpenRequest* _this = reinterpret_cast< PredictorOpenRequest* >(object);
+  (void)_this;
+}
+void PredictorOpenRequest::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void PredictorOpenRequest::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -983,11 +1060,7 @@ const PredictorOpenRequest& PredictorOpenRequest::default_instance() {
 }
 
 PredictorOpenRequest* PredictorOpenRequest::New(::google::protobuf::Arena* arena) const {
-  PredictorOpenRequest* n = new PredictorOpenRequest;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<PredictorOpenRequest>(arena);
 }
 
 void PredictorOpenRequest::Clear() {
@@ -996,10 +1069,10 @@ void PredictorOpenRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  model_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  model_version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  framework_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  framework_version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  model_name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  model_version_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  framework_name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  framework_version_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   _internal_metadata_.Clear();
 }
 
@@ -1276,20 +1349,16 @@ void PredictorOpenRequest::MergeFrom(const PredictorOpenRequest& from) {
   (void) cached_has_bits;
 
   if (from.model_name().size() > 0) {
-
-    model_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.model_name_);
+    set_model_name(from.model_name());
   }
   if (from.model_version().size() > 0) {
-
-    model_version_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.model_version_);
+    set_model_version(from.model_version());
   }
   if (from.framework_name().size() > 0) {
-
-    framework_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.framework_name_);
+    set_framework_name(from.framework_name());
   }
   if (from.framework_version().size() > 0) {
-
-    framework_version_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.framework_version_);
+    set_framework_version(from.framework_version());
   }
 }
 
@@ -1313,6 +1382,21 @@ bool PredictorOpenRequest::IsInitialized() const {
 
 void PredictorOpenRequest::Swap(PredictorOpenRequest* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    PredictorOpenRequest* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void PredictorOpenRequest::UnsafeArenaSwap(PredictorOpenRequest* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void PredictorOpenRequest::InternalSwap(PredictorOpenRequest* other) {
@@ -1335,46 +1419,55 @@ void PredictorOpenRequest::InternalSwap(PredictorOpenRequest* other) {
 
 // string model_name = 1 [(.gogoproto.moretags) = "yaml:\"model_name,omitempty\""];
 void PredictorOpenRequest::clear_model_name() {
-  model_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  model_name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& PredictorOpenRequest::model_name() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.PredictorOpenRequest.model_name)
-  return model_name_.GetNoArena();
+  return model_name_.Get();
 }
 void PredictorOpenRequest::set_model_name(const ::std::string& value) {
   
-  model_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  model_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.PredictorOpenRequest.model_name)
 }
 #if LANG_CXX11
 void PredictorOpenRequest::set_model_name(::std::string&& value) {
   
-  model_name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  model_name_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.PredictorOpenRequest.model_name)
 }
 #endif
 void PredictorOpenRequest::set_model_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  model_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  model_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.PredictorOpenRequest.model_name)
 }
-void PredictorOpenRequest::set_model_name(const char* value, size_t size) {
+void PredictorOpenRequest::set_model_name(const char* value,
+    size_t size) {
   
-  model_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  model_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.PredictorOpenRequest.model_name)
 }
 ::std::string* PredictorOpenRequest::mutable_model_name() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.PredictorOpenRequest.model_name)
-  return model_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return model_name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* PredictorOpenRequest::release_model_name() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.PredictorOpenRequest.model_name)
   
-  return model_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return model_name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* PredictorOpenRequest::unsafe_arena_release_model_name() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.PredictorOpenRequest.model_name)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return model_name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void PredictorOpenRequest::set_allocated_model_name(::std::string* model_name) {
   if (model_name != NULL) {
@@ -1382,52 +1475,74 @@ void PredictorOpenRequest::set_allocated_model_name(::std::string* model_name) {
   } else {
     
   }
-  model_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), model_name);
+  model_name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), model_name,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.PredictorOpenRequest.model_name)
+}
+void PredictorOpenRequest::unsafe_arena_set_allocated_model_name(
+    ::std::string* model_name) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (model_name != NULL) {
+    
+  } else {
+    
+  }
+  model_name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      model_name, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.PredictorOpenRequest.model_name)
 }
 
 // string model_version = 2 [(.gogoproto.moretags) = "yaml:\"model_version,omitempty\""];
 void PredictorOpenRequest::clear_model_version() {
-  model_version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  model_version_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& PredictorOpenRequest::model_version() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.PredictorOpenRequest.model_version)
-  return model_version_.GetNoArena();
+  return model_version_.Get();
 }
 void PredictorOpenRequest::set_model_version(const ::std::string& value) {
   
-  model_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  model_version_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.PredictorOpenRequest.model_version)
 }
 #if LANG_CXX11
 void PredictorOpenRequest::set_model_version(::std::string&& value) {
   
-  model_version_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  model_version_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.PredictorOpenRequest.model_version)
 }
 #endif
 void PredictorOpenRequest::set_model_version(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  model_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  model_version_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.PredictorOpenRequest.model_version)
 }
-void PredictorOpenRequest::set_model_version(const char* value, size_t size) {
+void PredictorOpenRequest::set_model_version(const char* value,
+    size_t size) {
   
-  model_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  model_version_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.PredictorOpenRequest.model_version)
 }
 ::std::string* PredictorOpenRequest::mutable_model_version() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.PredictorOpenRequest.model_version)
-  return model_version_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return model_version_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* PredictorOpenRequest::release_model_version() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.PredictorOpenRequest.model_version)
   
-  return model_version_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return model_version_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* PredictorOpenRequest::unsafe_arena_release_model_version() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.PredictorOpenRequest.model_version)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return model_version_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void PredictorOpenRequest::set_allocated_model_version(::std::string* model_version) {
   if (model_version != NULL) {
@@ -1435,52 +1550,74 @@ void PredictorOpenRequest::set_allocated_model_version(::std::string* model_vers
   } else {
     
   }
-  model_version_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), model_version);
+  model_version_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), model_version,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.PredictorOpenRequest.model_version)
+}
+void PredictorOpenRequest::unsafe_arena_set_allocated_model_version(
+    ::std::string* model_version) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (model_version != NULL) {
+    
+  } else {
+    
+  }
+  model_version_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      model_version, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.PredictorOpenRequest.model_version)
 }
 
 // string framework_name = 3 [(.gogoproto.moretags) = "yaml:\"framework_name,omitempty\""];
 void PredictorOpenRequest::clear_framework_name() {
-  framework_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  framework_name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& PredictorOpenRequest::framework_name() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.PredictorOpenRequest.framework_name)
-  return framework_name_.GetNoArena();
+  return framework_name_.Get();
 }
 void PredictorOpenRequest::set_framework_name(const ::std::string& value) {
   
-  framework_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  framework_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.PredictorOpenRequest.framework_name)
 }
 #if LANG_CXX11
 void PredictorOpenRequest::set_framework_name(::std::string&& value) {
   
-  framework_name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  framework_name_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.PredictorOpenRequest.framework_name)
 }
 #endif
 void PredictorOpenRequest::set_framework_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  framework_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  framework_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.PredictorOpenRequest.framework_name)
 }
-void PredictorOpenRequest::set_framework_name(const char* value, size_t size) {
+void PredictorOpenRequest::set_framework_name(const char* value,
+    size_t size) {
   
-  framework_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  framework_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.PredictorOpenRequest.framework_name)
 }
 ::std::string* PredictorOpenRequest::mutable_framework_name() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.PredictorOpenRequest.framework_name)
-  return framework_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return framework_name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* PredictorOpenRequest::release_framework_name() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.PredictorOpenRequest.framework_name)
   
-  return framework_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return framework_name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* PredictorOpenRequest::unsafe_arena_release_framework_name() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.PredictorOpenRequest.framework_name)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return framework_name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void PredictorOpenRequest::set_allocated_framework_name(::std::string* framework_name) {
   if (framework_name != NULL) {
@@ -1488,52 +1625,74 @@ void PredictorOpenRequest::set_allocated_framework_name(::std::string* framework
   } else {
     
   }
-  framework_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), framework_name);
+  framework_name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), framework_name,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.PredictorOpenRequest.framework_name)
+}
+void PredictorOpenRequest::unsafe_arena_set_allocated_framework_name(
+    ::std::string* framework_name) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (framework_name != NULL) {
+    
+  } else {
+    
+  }
+  framework_name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      framework_name, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.PredictorOpenRequest.framework_name)
 }
 
 // string framework_version = 4 [(.gogoproto.moretags) = "yaml:\"framework_version,omitempty\""];
 void PredictorOpenRequest::clear_framework_version() {
-  framework_version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  framework_version_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& PredictorOpenRequest::framework_version() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.PredictorOpenRequest.framework_version)
-  return framework_version_.GetNoArena();
+  return framework_version_.Get();
 }
 void PredictorOpenRequest::set_framework_version(const ::std::string& value) {
   
-  framework_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  framework_version_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.PredictorOpenRequest.framework_version)
 }
 #if LANG_CXX11
 void PredictorOpenRequest::set_framework_version(::std::string&& value) {
   
-  framework_version_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  framework_version_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.PredictorOpenRequest.framework_version)
 }
 #endif
 void PredictorOpenRequest::set_framework_version(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  framework_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  framework_version_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.PredictorOpenRequest.framework_version)
 }
-void PredictorOpenRequest::set_framework_version(const char* value, size_t size) {
+void PredictorOpenRequest::set_framework_version(const char* value,
+    size_t size) {
   
-  framework_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  framework_version_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.PredictorOpenRequest.framework_version)
 }
 ::std::string* PredictorOpenRequest::mutable_framework_version() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.PredictorOpenRequest.framework_version)
-  return framework_version_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return framework_version_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* PredictorOpenRequest::release_framework_version() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.PredictorOpenRequest.framework_version)
   
-  return framework_version_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return framework_version_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* PredictorOpenRequest::unsafe_arena_release_framework_version() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.PredictorOpenRequest.framework_version)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return framework_version_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void PredictorOpenRequest::set_allocated_framework_version(::std::string* framework_version) {
   if (framework_version != NULL) {
@@ -1541,8 +1700,21 @@ void PredictorOpenRequest::set_allocated_framework_version(::std::string* framew
   } else {
     
   }
-  framework_version_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), framework_version);
+  framework_version_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), framework_version,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.PredictorOpenRequest.framework_version)
+}
+void PredictorOpenRequest::unsafe_arena_set_allocated_framework_version(
+    ::std::string* framework_version) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (framework_version != NULL) {
+    
+  } else {
+    
+  }
+  framework_version_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      framework_version, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.PredictorOpenRequest.framework_version)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -1559,6 +1731,14 @@ PredictorCloseResponse::PredictorCloseResponse()
   }
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.PredictorCloseResponse)
+}
+PredictorCloseResponse::PredictorCloseResponse(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.PredictorCloseResponse)
 }
 PredictorCloseResponse::PredictorCloseResponse(const PredictorCloseResponse& from)
   : ::google::protobuf::Message(),
@@ -1578,8 +1758,20 @@ PredictorCloseResponse::~PredictorCloseResponse() {
 }
 
 void PredictorCloseResponse::SharedDtor() {
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
 }
 
+void PredictorCloseResponse::ArenaDtor(void* object) {
+  PredictorCloseResponse* _this = reinterpret_cast< PredictorCloseResponse* >(object);
+  (void)_this;
+}
+void PredictorCloseResponse::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void PredictorCloseResponse::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -1596,11 +1788,7 @@ const PredictorCloseResponse& PredictorCloseResponse::default_instance() {
 }
 
 PredictorCloseResponse* PredictorCloseResponse::New(::google::protobuf::Arena* arena) const {
-  PredictorCloseResponse* n = new PredictorCloseResponse;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<PredictorCloseResponse>(arena);
 }
 
 void PredictorCloseResponse::Clear() {
@@ -1725,6 +1913,21 @@ bool PredictorCloseResponse::IsInitialized() const {
 
 void PredictorCloseResponse::Swap(PredictorCloseResponse* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    PredictorCloseResponse* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void PredictorCloseResponse::UnsafeArenaSwap(PredictorCloseResponse* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void PredictorCloseResponse::InternalSwap(PredictorCloseResponse* other) {
@@ -1758,6 +1961,14 @@ PredictionOptions::PredictionOptions()
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.PredictionOptions)
 }
+PredictionOptions::PredictionOptions(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.PredictionOptions)
+}
 PredictionOptions::PredictionOptions(const PredictionOptions& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -1765,7 +1976,8 @@ PredictionOptions::PredictionOptions(const PredictionOptions& from)
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   request_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.request_id().size() > 0) {
-    request_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.request_id_);
+    request_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.request_id(),
+      GetArenaNoVirtual());
   }
   feature_limit_ = from.feature_limit_;
   // @@protoc_insertion_point(copy_constructor:carml.org.predictor.PredictionOptions)
@@ -1783,9 +1995,21 @@ PredictionOptions::~PredictionOptions() {
 }
 
 void PredictionOptions::SharedDtor() {
-  request_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  request_id_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
 }
 
+void PredictionOptions::ArenaDtor(void* object) {
+  PredictionOptions* _this = reinterpret_cast< PredictionOptions* >(object);
+  (void)_this;
+}
+void PredictionOptions::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void PredictionOptions::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -1802,11 +2026,7 @@ const PredictionOptions& PredictionOptions::default_instance() {
 }
 
 PredictionOptions* PredictionOptions::New(::google::protobuf::Arena* arena) const {
-  PredictionOptions* n = new PredictionOptions;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<PredictionOptions>(arena);
 }
 
 void PredictionOptions::Clear() {
@@ -1815,7 +2035,7 @@ void PredictionOptions::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  request_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  request_id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   feature_limit_ = 0;
   _internal_metadata_.Clear();
 }
@@ -1992,8 +2212,7 @@ void PredictionOptions::MergeFrom(const PredictionOptions& from) {
   (void) cached_has_bits;
 
   if (from.request_id().size() > 0) {
-
-    request_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.request_id_);
+    set_request_id(from.request_id());
   }
   if (from.feature_limit() != 0) {
     set_feature_limit(from.feature_limit());
@@ -2020,6 +2239,21 @@ bool PredictionOptions::IsInitialized() const {
 
 void PredictionOptions::Swap(PredictionOptions* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    PredictionOptions* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void PredictionOptions::UnsafeArenaSwap(PredictionOptions* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void PredictionOptions::InternalSwap(PredictionOptions* other) {
@@ -2040,46 +2274,55 @@ void PredictionOptions::InternalSwap(PredictionOptions* other) {
 
 // string request_id = 1 [(.gogoproto.customname) = "RequestID", (.gogoproto.jsontag) = "request_id,omitempty", (.gogoproto.moretags) = "yaml:\"request_id,omitempty\""];
 void PredictionOptions::clear_request_id() {
-  request_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  request_id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& PredictionOptions::request_id() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.PredictionOptions.request_id)
-  return request_id_.GetNoArena();
+  return request_id_.Get();
 }
 void PredictionOptions::set_request_id(const ::std::string& value) {
   
-  request_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  request_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.PredictionOptions.request_id)
 }
 #if LANG_CXX11
 void PredictionOptions::set_request_id(::std::string&& value) {
   
-  request_id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  request_id_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.PredictionOptions.request_id)
 }
 #endif
 void PredictionOptions::set_request_id(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  request_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  request_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.PredictionOptions.request_id)
 }
-void PredictionOptions::set_request_id(const char* value, size_t size) {
+void PredictionOptions::set_request_id(const char* value,
+    size_t size) {
   
-  request_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  request_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.PredictionOptions.request_id)
 }
 ::std::string* PredictionOptions::mutable_request_id() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.PredictionOptions.request_id)
-  return request_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return request_id_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* PredictionOptions::release_request_id() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.PredictionOptions.request_id)
   
-  return request_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return request_id_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* PredictionOptions::unsafe_arena_release_request_id() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.PredictionOptions.request_id)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return request_id_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void PredictionOptions::set_allocated_request_id(::std::string* request_id) {
   if (request_id != NULL) {
@@ -2087,8 +2330,21 @@ void PredictionOptions::set_allocated_request_id(::std::string* request_id) {
   } else {
     
   }
-  request_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), request_id);
+  request_id_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), request_id,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.PredictionOptions.request_id)
+}
+void PredictionOptions::unsafe_arena_set_allocated_request_id(
+    ::std::string* request_id) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (request_id != NULL) {
+    
+  } else {
+    
+  }
+  request_id_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      request_id, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.PredictionOptions.request_id)
 }
 
 // int32 feature_limit = 2 [(.gogoproto.moretags) = "yaml:\"feature_limit,omitempty\""];
@@ -2121,6 +2377,14 @@ Predictor::Predictor()
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.Predictor)
 }
+Predictor::Predictor(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.Predictor)
+}
 Predictor::Predictor(const Predictor& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -2128,7 +2392,8 @@ Predictor::Predictor(const Predictor& from)
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.id().size() > 0) {
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id(),
+      GetArenaNoVirtual());
   }
   // @@protoc_insertion_point(copy_constructor:carml.org.predictor.Predictor)
 }
@@ -2144,9 +2409,21 @@ Predictor::~Predictor() {
 }
 
 void Predictor::SharedDtor() {
-  id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  id_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
 }
 
+void Predictor::ArenaDtor(void* object) {
+  Predictor* _this = reinterpret_cast< Predictor* >(object);
+  (void)_this;
+}
+void Predictor::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void Predictor::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -2163,11 +2440,7 @@ const Predictor& Predictor::default_instance() {
 }
 
 Predictor* Predictor::New(::google::protobuf::Arena* arena) const {
-  Predictor* n = new Predictor;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<Predictor>(arena);
 }
 
 void Predictor::Clear() {
@@ -2176,7 +2449,7 @@ void Predictor::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   _internal_metadata_.Clear();
 }
 
@@ -2321,8 +2594,7 @@ void Predictor::MergeFrom(const Predictor& from) {
   (void) cached_has_bits;
 
   if (from.id().size() > 0) {
-
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    set_id(from.id());
   }
 }
 
@@ -2346,6 +2618,21 @@ bool Predictor::IsInitialized() const {
 
 void Predictor::Swap(Predictor* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    Predictor* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void Predictor::UnsafeArenaSwap(Predictor* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void Predictor::InternalSwap(Predictor* other) {
@@ -2365,46 +2652,55 @@ void Predictor::InternalSwap(Predictor* other) {
 
 // string id = 1 [(.gogoproto.customname) = "ID", (.gogoproto.jsontag) = "id,omitempty", (.gogoproto.moretags) = "yaml:\"id,omitempty\""];
 void Predictor::clear_id() {
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& Predictor::id() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.Predictor.id)
-  return id_.GetNoArena();
+  return id_.Get();
 }
 void Predictor::set_id(const ::std::string& value) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.Predictor.id)
 }
 #if LANG_CXX11
 void Predictor::set_id(::std::string&& value) {
   
-  id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  id_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.Predictor.id)
 }
 #endif
 void Predictor::set_id(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.Predictor.id)
 }
-void Predictor::set_id(const char* value, size_t size) {
+void Predictor::set_id(const char* value,
+    size_t size) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.Predictor.id)
 }
 ::std::string* Predictor::mutable_id() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.Predictor.id)
-  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* Predictor::release_id() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.Predictor.id)
   
-  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* Predictor::unsafe_arena_release_id() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.Predictor.id)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return id_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void Predictor::set_allocated_id(::std::string* id) {
   if (id != NULL) {
@@ -2412,8 +2708,21 @@ void Predictor::set_allocated_id(::std::string* id) {
   } else {
     
   }
-  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  id_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.Predictor.id)
+}
+void Predictor::unsafe_arena_set_allocated_id(
+    ::std::string* id) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (id != NULL) {
+    
+  } else {
+    
+  }
+  id_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      id, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.Predictor.id)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -2433,6 +2742,14 @@ URLsRequest_URL::URLsRequest_URL()
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.URLsRequest.URL)
 }
+URLsRequest_URL::URLsRequest_URL(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.URLsRequest.URL)
+}
 URLsRequest_URL::URLsRequest_URL(const URLsRequest_URL& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -2440,11 +2757,13 @@ URLsRequest_URL::URLsRequest_URL(const URLsRequest_URL& from)
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.id().size() > 0) {
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id(),
+      GetArenaNoVirtual());
   }
   data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.data().size() > 0) {
-    data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.data_);
+    data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.data(),
+      GetArenaNoVirtual());
   }
   // @@protoc_insertion_point(copy_constructor:carml.org.predictor.URLsRequest.URL)
 }
@@ -2461,10 +2780,22 @@ URLsRequest_URL::~URLsRequest_URL() {
 }
 
 void URLsRequest_URL::SharedDtor() {
-  id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  data_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  id_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
+  data_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
 }
 
+void URLsRequest_URL::ArenaDtor(void* object) {
+  URLsRequest_URL* _this = reinterpret_cast< URLsRequest_URL* >(object);
+  (void)_this;
+}
+void URLsRequest_URL::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void URLsRequest_URL::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -2481,11 +2812,7 @@ const URLsRequest_URL& URLsRequest_URL::default_instance() {
 }
 
 URLsRequest_URL* URLsRequest_URL::New(::google::protobuf::Arena* arena) const {
-  URLsRequest_URL* n = new URLsRequest_URL;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<URLsRequest_URL>(arena);
 }
 
 void URLsRequest_URL::Clear() {
@@ -2494,8 +2821,8 @@ void URLsRequest_URL::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  data_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   _internal_metadata_.Clear();
 }
 
@@ -2684,12 +3011,10 @@ void URLsRequest_URL::MergeFrom(const URLsRequest_URL& from) {
   (void) cached_has_bits;
 
   if (from.id().size() > 0) {
-
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    set_id(from.id());
   }
   if (from.data().size() > 0) {
-
-    data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.data_);
+    set_data(from.data());
   }
 }
 
@@ -2713,6 +3038,21 @@ bool URLsRequest_URL::IsInitialized() const {
 
 void URLsRequest_URL::Swap(URLsRequest_URL* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    URLsRequest_URL* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void URLsRequest_URL::UnsafeArenaSwap(URLsRequest_URL* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void URLsRequest_URL::InternalSwap(URLsRequest_URL* other) {
@@ -2733,46 +3073,55 @@ void URLsRequest_URL::InternalSwap(URLsRequest_URL* other) {
 
 // string id = 1 [(.gogoproto.customname) = "ID", (.gogoproto.jsontag) = "id,omitempty", (.gogoproto.moretags) = "yaml:\"id,omitempty\""];
 void URLsRequest_URL::clear_id() {
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& URLsRequest_URL::id() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.URLsRequest.URL.id)
-  return id_.GetNoArena();
+  return id_.Get();
 }
 void URLsRequest_URL::set_id(const ::std::string& value) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.URLsRequest.URL.id)
 }
 #if LANG_CXX11
 void URLsRequest_URL::set_id(::std::string&& value) {
   
-  id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  id_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.URLsRequest.URL.id)
 }
 #endif
 void URLsRequest_URL::set_id(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.URLsRequest.URL.id)
 }
-void URLsRequest_URL::set_id(const char* value, size_t size) {
+void URLsRequest_URL::set_id(const char* value,
+    size_t size) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.URLsRequest.URL.id)
 }
 ::std::string* URLsRequest_URL::mutable_id() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.URLsRequest.URL.id)
-  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* URLsRequest_URL::release_id() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.URLsRequest.URL.id)
   
-  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* URLsRequest_URL::unsafe_arena_release_id() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.URLsRequest.URL.id)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return id_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void URLsRequest_URL::set_allocated_id(::std::string* id) {
   if (id != NULL) {
@@ -2780,52 +3129,74 @@ void URLsRequest_URL::set_allocated_id(::std::string* id) {
   } else {
     
   }
-  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  id_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.URLsRequest.URL.id)
+}
+void URLsRequest_URL::unsafe_arena_set_allocated_id(
+    ::std::string* id) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (id != NULL) {
+    
+  } else {
+    
+  }
+  id_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      id, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.URLsRequest.URL.id)
 }
 
 // string data = 2 [(.gogoproto.moretags) = "yaml:\"data,omitempty\""];
 void URLsRequest_URL::clear_data() {
-  data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  data_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& URLsRequest_URL::data() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.URLsRequest.URL.data)
-  return data_.GetNoArena();
+  return data_.Get();
 }
 void URLsRequest_URL::set_data(const ::std::string& value) {
   
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.URLsRequest.URL.data)
 }
 #if LANG_CXX11
 void URLsRequest_URL::set_data(::std::string&& value) {
   
-  data_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  data_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.URLsRequest.URL.data)
 }
 #endif
 void URLsRequest_URL::set_data(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.URLsRequest.URL.data)
 }
-void URLsRequest_URL::set_data(const char* value, size_t size) {
+void URLsRequest_URL::set_data(const char* value,
+    size_t size) {
   
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.URLsRequest.URL.data)
 }
 ::std::string* URLsRequest_URL::mutable_data() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.URLsRequest.URL.data)
-  return data_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return data_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* URLsRequest_URL::release_data() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.URLsRequest.URL.data)
   
-  return data_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return data_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* URLsRequest_URL::unsafe_arena_release_data() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.URLsRequest.URL.data)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return data_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void URLsRequest_URL::set_allocated_data(::std::string* data) {
   if (data != NULL) {
@@ -2833,14 +3204,121 @@ void URLsRequest_URL::set_allocated_data(::std::string* data) {
   } else {
     
   }
-  data_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data);
+  data_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.URLsRequest.URL.data)
+}
+void URLsRequest_URL::unsafe_arena_set_allocated_data(
+    ::std::string* data) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (data != NULL) {
+    
+  } else {
+    
+  }
+  data_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      data, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.URLsRequest.URL.data)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
+void URLsRequest::_slow_mutable_predictor() {
+  predictor_ = ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::Predictor >(
+      GetArenaNoVirtual());
+}
+::carml::org::predictor::Predictor* URLsRequest::_slow_release_predictor() {
+  if (predictor_ == NULL) {
+    return NULL;
+  } else {
+    ::carml::org::predictor::Predictor* temp = new ::carml::org::predictor::Predictor(*predictor_);
+    predictor_ = NULL;
+    return temp;
+  }
+}
+::carml::org::predictor::Predictor* URLsRequest::unsafe_arena_release_predictor() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.URLsRequest.predictor)
+  
+  ::carml::org::predictor::Predictor* temp = predictor_;
+  predictor_ = NULL;
+  return temp;
+}
+void URLsRequest::_slow_set_allocated_predictor(
+    ::google::protobuf::Arena* message_arena, ::carml::org::predictor::Predictor** predictor) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*predictor) == NULL) {
+      message_arena->Own(*predictor);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*predictor)) {
+      ::carml::org::predictor::Predictor* new_predictor = 
+            ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::Predictor >(
+            message_arena);
+      new_predictor->CopyFrom(**predictor);
+      *predictor = new_predictor;
+    }
+}
+void URLsRequest::unsafe_arena_set_allocated_predictor(
+    ::carml::org::predictor::Predictor* predictor) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete predictor_;
+  }
+  predictor_ = predictor;
+  if (predictor) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.URLsRequest.predictor)
+}
+void URLsRequest::_slow_mutable_options() {
+  options_ = ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::PredictionOptions >(
+      GetArenaNoVirtual());
+}
+::carml::org::predictor::PredictionOptions* URLsRequest::_slow_release_options() {
+  if (options_ == NULL) {
+    return NULL;
+  } else {
+    ::carml::org::predictor::PredictionOptions* temp = new ::carml::org::predictor::PredictionOptions(*options_);
+    options_ = NULL;
+    return temp;
+  }
+}
+::carml::org::predictor::PredictionOptions* URLsRequest::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.URLsRequest.options)
+  
+  ::carml::org::predictor::PredictionOptions* temp = options_;
+  options_ = NULL;
+  return temp;
+}
+void URLsRequest::_slow_set_allocated_options(
+    ::google::protobuf::Arena* message_arena, ::carml::org::predictor::PredictionOptions** options) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*options) == NULL) {
+      message_arena->Own(*options);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*options)) {
+      ::carml::org::predictor::PredictionOptions* new_options = 
+            ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::PredictionOptions >(
+            message_arena);
+      new_options->CopyFrom(**options);
+      *options = new_options;
+    }
+}
+void URLsRequest::unsafe_arena_set_allocated_options(
+    ::carml::org::predictor::PredictionOptions* options) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete options_;
+  }
+  options_ = options;
+  if (options) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.URLsRequest.options)
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int URLsRequest::kPredictorFieldNumber;
 const int URLsRequest::kUrlsFieldNumber;
@@ -2854,6 +3332,15 @@ URLsRequest::URLsRequest()
   }
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.URLsRequest)
+}
+URLsRequest::URLsRequest(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena),
+  urls_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.URLsRequest)
 }
 URLsRequest::URLsRequest(const URLsRequest& from)
   : ::google::protobuf::Message(),
@@ -2887,10 +3374,22 @@ URLsRequest::~URLsRequest() {
 }
 
 void URLsRequest::SharedDtor() {
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
   if (this != internal_default_instance()) delete predictor_;
   if (this != internal_default_instance()) delete options_;
 }
 
+void URLsRequest::ArenaDtor(void* object) {
+  URLsRequest* _this = reinterpret_cast< URLsRequest* >(object);
+  (void)_this;
+}
+void URLsRequest::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void URLsRequest::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -2907,11 +3406,7 @@ const URLsRequest& URLsRequest::default_instance() {
 }
 
 URLsRequest* URLsRequest::New(::google::protobuf::Arena* arena) const {
-  URLsRequest* n = new URLsRequest;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<URLsRequest>(arena);
 }
 
 void URLsRequest::Clear() {
@@ -3159,6 +3654,21 @@ bool URLsRequest::IsInitialized() const {
 
 void URLsRequest::Swap(URLsRequest* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    URLsRequest* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void URLsRequest::UnsafeArenaSwap(URLsRequest* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void URLsRequest::InternalSwap(URLsRequest* other) {
@@ -3195,7 +3705,7 @@ const ::carml::org::predictor::Predictor& URLsRequest::predictor() const {
 ::carml::org::predictor::Predictor* URLsRequest::mutable_predictor() {
   
   if (predictor_ == NULL) {
-    predictor_ = new ::carml::org::predictor::Predictor;
+    _slow_mutable_predictor();
   }
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.URLsRequest.predictor)
   return predictor_;
@@ -3203,12 +3713,22 @@ const ::carml::org::predictor::Predictor& URLsRequest::predictor() const {
 ::carml::org::predictor::Predictor* URLsRequest::release_predictor() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.URLsRequest.predictor)
   
-  ::carml::org::predictor::Predictor* temp = predictor_;
-  predictor_ = NULL;
-  return temp;
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_predictor();
+  } else {
+    ::carml::org::predictor::Predictor* temp = predictor_;
+    predictor_ = NULL;
+    return temp;
+  }
 }
-void URLsRequest::set_allocated_predictor(::carml::org::predictor::Predictor* predictor) {
-  delete predictor_;
+ void URLsRequest::set_allocated_predictor(::carml::org::predictor::Predictor* predictor) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete predictor_;
+  }
+  if (predictor != NULL) {
+    _slow_set_allocated_predictor(message_arena, &predictor);
+  }
   predictor_ = predictor;
   if (predictor) {
     
@@ -3265,7 +3785,7 @@ const ::carml::org::predictor::PredictionOptions& URLsRequest::options() const {
 ::carml::org::predictor::PredictionOptions* URLsRequest::mutable_options() {
   
   if (options_ == NULL) {
-    options_ = new ::carml::org::predictor::PredictionOptions;
+    _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.URLsRequest.options)
   return options_;
@@ -3273,12 +3793,22 @@ const ::carml::org::predictor::PredictionOptions& URLsRequest::options() const {
 ::carml::org::predictor::PredictionOptions* URLsRequest::release_options() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.URLsRequest.options)
   
-  ::carml::org::predictor::PredictionOptions* temp = options_;
-  options_ = NULL;
-  return temp;
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_options();
+  } else {
+    ::carml::org::predictor::PredictionOptions* temp = options_;
+    options_ = NULL;
+    return temp;
+  }
 }
-void URLsRequest::set_allocated_options(::carml::org::predictor::PredictionOptions* options) {
-  delete options_;
+ void URLsRequest::set_allocated_options(::carml::org::predictor::PredictionOptions* options) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete options_;
+  }
+  if (options != NULL) {
+    _slow_set_allocated_options(message_arena, &options);
+  }
   options_ = options;
   if (options) {
     
@@ -3306,6 +3836,14 @@ ImagesRequest_Image::ImagesRequest_Image()
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.ImagesRequest.Image)
 }
+ImagesRequest_Image::ImagesRequest_Image(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.ImagesRequest.Image)
+}
 ImagesRequest_Image::ImagesRequest_Image(const ImagesRequest_Image& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -3313,11 +3851,13 @@ ImagesRequest_Image::ImagesRequest_Image(const ImagesRequest_Image& from)
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.id().size() > 0) {
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id(),
+      GetArenaNoVirtual());
   }
   data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.data().size() > 0) {
-    data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.data_);
+    data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.data(),
+      GetArenaNoVirtual());
   }
   preprocessed_ = from.preprocessed_;
   // @@protoc_insertion_point(copy_constructor:carml.org.predictor.ImagesRequest.Image)
@@ -3336,10 +3876,22 @@ ImagesRequest_Image::~ImagesRequest_Image() {
 }
 
 void ImagesRequest_Image::SharedDtor() {
-  id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  data_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  id_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
+  data_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
 }
 
+void ImagesRequest_Image::ArenaDtor(void* object) {
+  ImagesRequest_Image* _this = reinterpret_cast< ImagesRequest_Image* >(object);
+  (void)_this;
+}
+void ImagesRequest_Image::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void ImagesRequest_Image::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -3356,11 +3908,7 @@ const ImagesRequest_Image& ImagesRequest_Image::default_instance() {
 }
 
 ImagesRequest_Image* ImagesRequest_Image::New(::google::protobuf::Arena* arena) const {
-  ImagesRequest_Image* n = new ImagesRequest_Image;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<ImagesRequest_Image>(arena);
 }
 
 void ImagesRequest_Image::Clear() {
@@ -3369,8 +3917,8 @@ void ImagesRequest_Image::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  data_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   preprocessed_ = false;
   _internal_metadata_.Clear();
 }
@@ -3577,12 +4125,10 @@ void ImagesRequest_Image::MergeFrom(const ImagesRequest_Image& from) {
   (void) cached_has_bits;
 
   if (from.id().size() > 0) {
-
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    set_id(from.id());
   }
   if (from.data().size() > 0) {
-
-    data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.data_);
+    set_data(from.data());
   }
   if (from.preprocessed() != 0) {
     set_preprocessed(from.preprocessed());
@@ -3609,6 +4155,21 @@ bool ImagesRequest_Image::IsInitialized() const {
 
 void ImagesRequest_Image::Swap(ImagesRequest_Image* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    ImagesRequest_Image* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void ImagesRequest_Image::UnsafeArenaSwap(ImagesRequest_Image* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void ImagesRequest_Image::InternalSwap(ImagesRequest_Image* other) {
@@ -3630,46 +4191,55 @@ void ImagesRequest_Image::InternalSwap(ImagesRequest_Image* other) {
 
 // string id = 1 [(.gogoproto.customname) = "ID", (.gogoproto.jsontag) = "id,omitempty", (.gogoproto.moretags) = "yaml:\"id,omitempty\""];
 void ImagesRequest_Image::clear_id() {
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& ImagesRequest_Image::id() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.ImagesRequest.Image.id)
-  return id_.GetNoArena();
+  return id_.Get();
 }
 void ImagesRequest_Image::set_id(const ::std::string& value) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.ImagesRequest.Image.id)
 }
 #if LANG_CXX11
 void ImagesRequest_Image::set_id(::std::string&& value) {
   
-  id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  id_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.ImagesRequest.Image.id)
 }
 #endif
 void ImagesRequest_Image::set_id(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.ImagesRequest.Image.id)
 }
-void ImagesRequest_Image::set_id(const char* value, size_t size) {
+void ImagesRequest_Image::set_id(const char* value,
+    size_t size) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.ImagesRequest.Image.id)
 }
 ::std::string* ImagesRequest_Image::mutable_id() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.ImagesRequest.Image.id)
-  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* ImagesRequest_Image::release_id() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.ImagesRequest.Image.id)
   
-  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* ImagesRequest_Image::unsafe_arena_release_id() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.ImagesRequest.Image.id)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return id_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void ImagesRequest_Image::set_allocated_id(::std::string* id) {
   if (id != NULL) {
@@ -3677,52 +4247,74 @@ void ImagesRequest_Image::set_allocated_id(::std::string* id) {
   } else {
     
   }
-  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  id_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.ImagesRequest.Image.id)
+}
+void ImagesRequest_Image::unsafe_arena_set_allocated_id(
+    ::std::string* id) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (id != NULL) {
+    
+  } else {
+    
+  }
+  id_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      id, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.ImagesRequest.Image.id)
 }
 
 // bytes data = 2 [(.gogoproto.moretags) = "yaml:\"data,omitempty\""];
 void ImagesRequest_Image::clear_data() {
-  data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  data_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& ImagesRequest_Image::data() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.ImagesRequest.Image.data)
-  return data_.GetNoArena();
+  return data_.Get();
 }
 void ImagesRequest_Image::set_data(const ::std::string& value) {
   
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.ImagesRequest.Image.data)
 }
 #if LANG_CXX11
 void ImagesRequest_Image::set_data(::std::string&& value) {
   
-  data_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  data_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.ImagesRequest.Image.data)
 }
 #endif
 void ImagesRequest_Image::set_data(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.ImagesRequest.Image.data)
 }
-void ImagesRequest_Image::set_data(const void* value, size_t size) {
+void ImagesRequest_Image::set_data(const void* value,
+    size_t size) {
   
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.ImagesRequest.Image.data)
 }
 ::std::string* ImagesRequest_Image::mutable_data() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.ImagesRequest.Image.data)
-  return data_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return data_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* ImagesRequest_Image::release_data() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.ImagesRequest.Image.data)
   
-  return data_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return data_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* ImagesRequest_Image::unsafe_arena_release_data() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.ImagesRequest.Image.data)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return data_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void ImagesRequest_Image::set_allocated_data(::std::string* data) {
   if (data != NULL) {
@@ -3730,8 +4322,21 @@ void ImagesRequest_Image::set_allocated_data(::std::string* data) {
   } else {
     
   }
-  data_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data);
+  data_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.ImagesRequest.Image.data)
+}
+void ImagesRequest_Image::unsafe_arena_set_allocated_data(
+    ::std::string* data) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (data != NULL) {
+    
+  } else {
+    
+  }
+  data_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      data, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.ImagesRequest.Image.data)
 }
 
 // bool preprocessed = 3 [(.gogoproto.moretags) = "yaml:\"preprocessed,omitempty\""];
@@ -3752,6 +4357,100 @@ void ImagesRequest_Image::set_preprocessed(bool value) {
 
 // ===================================================================
 
+void ImagesRequest::_slow_mutable_predictor() {
+  predictor_ = ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::Predictor >(
+      GetArenaNoVirtual());
+}
+::carml::org::predictor::Predictor* ImagesRequest::_slow_release_predictor() {
+  if (predictor_ == NULL) {
+    return NULL;
+  } else {
+    ::carml::org::predictor::Predictor* temp = new ::carml::org::predictor::Predictor(*predictor_);
+    predictor_ = NULL;
+    return temp;
+  }
+}
+::carml::org::predictor::Predictor* ImagesRequest::unsafe_arena_release_predictor() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.ImagesRequest.predictor)
+  
+  ::carml::org::predictor::Predictor* temp = predictor_;
+  predictor_ = NULL;
+  return temp;
+}
+void ImagesRequest::_slow_set_allocated_predictor(
+    ::google::protobuf::Arena* message_arena, ::carml::org::predictor::Predictor** predictor) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*predictor) == NULL) {
+      message_arena->Own(*predictor);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*predictor)) {
+      ::carml::org::predictor::Predictor* new_predictor = 
+            ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::Predictor >(
+            message_arena);
+      new_predictor->CopyFrom(**predictor);
+      *predictor = new_predictor;
+    }
+}
+void ImagesRequest::unsafe_arena_set_allocated_predictor(
+    ::carml::org::predictor::Predictor* predictor) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete predictor_;
+  }
+  predictor_ = predictor;
+  if (predictor) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.ImagesRequest.predictor)
+}
+void ImagesRequest::_slow_mutable_options() {
+  options_ = ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::PredictionOptions >(
+      GetArenaNoVirtual());
+}
+::carml::org::predictor::PredictionOptions* ImagesRequest::_slow_release_options() {
+  if (options_ == NULL) {
+    return NULL;
+  } else {
+    ::carml::org::predictor::PredictionOptions* temp = new ::carml::org::predictor::PredictionOptions(*options_);
+    options_ = NULL;
+    return temp;
+  }
+}
+::carml::org::predictor::PredictionOptions* ImagesRequest::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.ImagesRequest.options)
+  
+  ::carml::org::predictor::PredictionOptions* temp = options_;
+  options_ = NULL;
+  return temp;
+}
+void ImagesRequest::_slow_set_allocated_options(
+    ::google::protobuf::Arena* message_arena, ::carml::org::predictor::PredictionOptions** options) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*options) == NULL) {
+      message_arena->Own(*options);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*options)) {
+      ::carml::org::predictor::PredictionOptions* new_options = 
+            ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::PredictionOptions >(
+            message_arena);
+      new_options->CopyFrom(**options);
+      *options = new_options;
+    }
+}
+void ImagesRequest::unsafe_arena_set_allocated_options(
+    ::carml::org::predictor::PredictionOptions* options) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete options_;
+  }
+  options_ = options;
+  if (options) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.ImagesRequest.options)
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ImagesRequest::kPredictorFieldNumber;
 const int ImagesRequest::kImagesFieldNumber;
@@ -3765,6 +4464,15 @@ ImagesRequest::ImagesRequest()
   }
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.ImagesRequest)
+}
+ImagesRequest::ImagesRequest(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena),
+  images_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.ImagesRequest)
 }
 ImagesRequest::ImagesRequest(const ImagesRequest& from)
   : ::google::protobuf::Message(),
@@ -3798,10 +4506,22 @@ ImagesRequest::~ImagesRequest() {
 }
 
 void ImagesRequest::SharedDtor() {
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
   if (this != internal_default_instance()) delete predictor_;
   if (this != internal_default_instance()) delete options_;
 }
 
+void ImagesRequest::ArenaDtor(void* object) {
+  ImagesRequest* _this = reinterpret_cast< ImagesRequest* >(object);
+  (void)_this;
+}
+void ImagesRequest::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void ImagesRequest::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -3818,11 +4538,7 @@ const ImagesRequest& ImagesRequest::default_instance() {
 }
 
 ImagesRequest* ImagesRequest::New(::google::protobuf::Arena* arena) const {
-  ImagesRequest* n = new ImagesRequest;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<ImagesRequest>(arena);
 }
 
 void ImagesRequest::Clear() {
@@ -4070,6 +4786,21 @@ bool ImagesRequest::IsInitialized() const {
 
 void ImagesRequest::Swap(ImagesRequest* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    ImagesRequest* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void ImagesRequest::UnsafeArenaSwap(ImagesRequest* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void ImagesRequest::InternalSwap(ImagesRequest* other) {
@@ -4106,7 +4837,7 @@ const ::carml::org::predictor::Predictor& ImagesRequest::predictor() const {
 ::carml::org::predictor::Predictor* ImagesRequest::mutable_predictor() {
   
   if (predictor_ == NULL) {
-    predictor_ = new ::carml::org::predictor::Predictor;
+    _slow_mutable_predictor();
   }
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.ImagesRequest.predictor)
   return predictor_;
@@ -4114,12 +4845,22 @@ const ::carml::org::predictor::Predictor& ImagesRequest::predictor() const {
 ::carml::org::predictor::Predictor* ImagesRequest::release_predictor() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.ImagesRequest.predictor)
   
-  ::carml::org::predictor::Predictor* temp = predictor_;
-  predictor_ = NULL;
-  return temp;
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_predictor();
+  } else {
+    ::carml::org::predictor::Predictor* temp = predictor_;
+    predictor_ = NULL;
+    return temp;
+  }
 }
-void ImagesRequest::set_allocated_predictor(::carml::org::predictor::Predictor* predictor) {
-  delete predictor_;
+ void ImagesRequest::set_allocated_predictor(::carml::org::predictor::Predictor* predictor) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete predictor_;
+  }
+  if (predictor != NULL) {
+    _slow_set_allocated_predictor(message_arena, &predictor);
+  }
   predictor_ = predictor;
   if (predictor) {
     
@@ -4176,7 +4917,7 @@ const ::carml::org::predictor::PredictionOptions& ImagesRequest::options() const
 ::carml::org::predictor::PredictionOptions* ImagesRequest::mutable_options() {
   
   if (options_ == NULL) {
-    options_ = new ::carml::org::predictor::PredictionOptions;
+    _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.ImagesRequest.options)
   return options_;
@@ -4184,12 +4925,22 @@ const ::carml::org::predictor::PredictionOptions& ImagesRequest::options() const
 ::carml::org::predictor::PredictionOptions* ImagesRequest::release_options() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.ImagesRequest.options)
   
-  ::carml::org::predictor::PredictionOptions* temp = options_;
-  options_ = NULL;
-  return temp;
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_options();
+  } else {
+    ::carml::org::predictor::PredictionOptions* temp = options_;
+    options_ = NULL;
+    return temp;
+  }
 }
-void ImagesRequest::set_allocated_options(::carml::org::predictor::PredictionOptions* options) {
-  delete options_;
+ void ImagesRequest::set_allocated_options(::carml::org::predictor::PredictionOptions* options) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete options_;
+  }
+  if (options != NULL) {
+    _slow_set_allocated_options(message_arena, &options);
+  }
   options_ = options;
   if (options) {
     
@@ -4216,6 +4967,14 @@ DatasetRequest_Dataset::DatasetRequest_Dataset()
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.DatasetRequest.Dataset)
 }
+DatasetRequest_Dataset::DatasetRequest_Dataset(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.DatasetRequest.Dataset)
+}
 DatasetRequest_Dataset::DatasetRequest_Dataset(const DatasetRequest_Dataset& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -4223,11 +4982,13 @@ DatasetRequest_Dataset::DatasetRequest_Dataset(const DatasetRequest_Dataset& fro
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   category_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.category().size() > 0) {
-    category_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.category_);
+    category_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.category(),
+      GetArenaNoVirtual());
   }
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.name().size() > 0) {
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+    name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name(),
+      GetArenaNoVirtual());
   }
   // @@protoc_insertion_point(copy_constructor:carml.org.predictor.DatasetRequest.Dataset)
 }
@@ -4244,10 +5005,22 @@ DatasetRequest_Dataset::~DatasetRequest_Dataset() {
 }
 
 void DatasetRequest_Dataset::SharedDtor() {
-  category_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  category_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
+  name_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
 }
 
+void DatasetRequest_Dataset::ArenaDtor(void* object) {
+  DatasetRequest_Dataset* _this = reinterpret_cast< DatasetRequest_Dataset* >(object);
+  (void)_this;
+}
+void DatasetRequest_Dataset::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void DatasetRequest_Dataset::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -4264,11 +5037,7 @@ const DatasetRequest_Dataset& DatasetRequest_Dataset::default_instance() {
 }
 
 DatasetRequest_Dataset* DatasetRequest_Dataset::New(::google::protobuf::Arena* arena) const {
-  DatasetRequest_Dataset* n = new DatasetRequest_Dataset;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<DatasetRequest_Dataset>(arena);
 }
 
 void DatasetRequest_Dataset::Clear() {
@@ -4277,8 +5046,8 @@ void DatasetRequest_Dataset::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  category_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  category_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   _internal_metadata_.Clear();
 }
 
@@ -4467,12 +5236,10 @@ void DatasetRequest_Dataset::MergeFrom(const DatasetRequest_Dataset& from) {
   (void) cached_has_bits;
 
   if (from.category().size() > 0) {
-
-    category_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.category_);
+    set_category(from.category());
   }
   if (from.name().size() > 0) {
-
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+    set_name(from.name());
   }
 }
 
@@ -4496,6 +5263,21 @@ bool DatasetRequest_Dataset::IsInitialized() const {
 
 void DatasetRequest_Dataset::Swap(DatasetRequest_Dataset* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    DatasetRequest_Dataset* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void DatasetRequest_Dataset::UnsafeArenaSwap(DatasetRequest_Dataset* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void DatasetRequest_Dataset::InternalSwap(DatasetRequest_Dataset* other) {
@@ -4516,46 +5298,55 @@ void DatasetRequest_Dataset::InternalSwap(DatasetRequest_Dataset* other) {
 
 // string category = 1 [(.gogoproto.moretags) = "yaml:\"category,omitempty\""];
 void DatasetRequest_Dataset::clear_category() {
-  category_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  category_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& DatasetRequest_Dataset::category() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.DatasetRequest.Dataset.category)
-  return category_.GetNoArena();
+  return category_.Get();
 }
 void DatasetRequest_Dataset::set_category(const ::std::string& value) {
   
-  category_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  category_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.DatasetRequest.Dataset.category)
 }
 #if LANG_CXX11
 void DatasetRequest_Dataset::set_category(::std::string&& value) {
   
-  category_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  category_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.DatasetRequest.Dataset.category)
 }
 #endif
 void DatasetRequest_Dataset::set_category(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  category_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  category_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.DatasetRequest.Dataset.category)
 }
-void DatasetRequest_Dataset::set_category(const char* value, size_t size) {
+void DatasetRequest_Dataset::set_category(const char* value,
+    size_t size) {
   
-  category_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  category_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.DatasetRequest.Dataset.category)
 }
 ::std::string* DatasetRequest_Dataset::mutable_category() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.DatasetRequest.Dataset.category)
-  return category_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return category_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* DatasetRequest_Dataset::release_category() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.DatasetRequest.Dataset.category)
   
-  return category_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return category_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* DatasetRequest_Dataset::unsafe_arena_release_category() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.DatasetRequest.Dataset.category)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return category_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void DatasetRequest_Dataset::set_allocated_category(::std::string* category) {
   if (category != NULL) {
@@ -4563,52 +5354,74 @@ void DatasetRequest_Dataset::set_allocated_category(::std::string* category) {
   } else {
     
   }
-  category_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), category);
+  category_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), category,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.DatasetRequest.Dataset.category)
+}
+void DatasetRequest_Dataset::unsafe_arena_set_allocated_category(
+    ::std::string* category) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (category != NULL) {
+    
+  } else {
+    
+  }
+  category_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      category, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.DatasetRequest.Dataset.category)
 }
 
 // string name = 2 [(.gogoproto.moretags) = "yaml:\"name,omitempty\""];
 void DatasetRequest_Dataset::clear_name() {
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& DatasetRequest_Dataset::name() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.DatasetRequest.Dataset.name)
-  return name_.GetNoArena();
+  return name_.Get();
 }
 void DatasetRequest_Dataset::set_name(const ::std::string& value) {
   
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.DatasetRequest.Dataset.name)
 }
 #if LANG_CXX11
 void DatasetRequest_Dataset::set_name(::std::string&& value) {
   
-  name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  name_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.DatasetRequest.Dataset.name)
 }
 #endif
 void DatasetRequest_Dataset::set_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.DatasetRequest.Dataset.name)
 }
-void DatasetRequest_Dataset::set_name(const char* value, size_t size) {
+void DatasetRequest_Dataset::set_name(const char* value,
+    size_t size) {
   
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.DatasetRequest.Dataset.name)
 }
 ::std::string* DatasetRequest_Dataset::mutable_name() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.DatasetRequest.Dataset.name)
-  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* DatasetRequest_Dataset::release_name() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.DatasetRequest.Dataset.name)
   
-  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* DatasetRequest_Dataset::unsafe_arena_release_name() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.DatasetRequest.Dataset.name)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void DatasetRequest_Dataset::set_allocated_name(::std::string* name) {
   if (name != NULL) {
@@ -4616,14 +5429,168 @@ void DatasetRequest_Dataset::set_allocated_name(::std::string* name) {
   } else {
     
   }
-  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.DatasetRequest.Dataset.name)
+}
+void DatasetRequest_Dataset::unsafe_arena_set_allocated_name(
+    ::std::string* name) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      name, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.DatasetRequest.Dataset.name)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
+void DatasetRequest::_slow_mutable_predictor() {
+  predictor_ = ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::Predictor >(
+      GetArenaNoVirtual());
+}
+::carml::org::predictor::Predictor* DatasetRequest::_slow_release_predictor() {
+  if (predictor_ == NULL) {
+    return NULL;
+  } else {
+    ::carml::org::predictor::Predictor* temp = new ::carml::org::predictor::Predictor(*predictor_);
+    predictor_ = NULL;
+    return temp;
+  }
+}
+::carml::org::predictor::Predictor* DatasetRequest::unsafe_arena_release_predictor() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.DatasetRequest.predictor)
+  
+  ::carml::org::predictor::Predictor* temp = predictor_;
+  predictor_ = NULL;
+  return temp;
+}
+void DatasetRequest::_slow_set_allocated_predictor(
+    ::google::protobuf::Arena* message_arena, ::carml::org::predictor::Predictor** predictor) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*predictor) == NULL) {
+      message_arena->Own(*predictor);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*predictor)) {
+      ::carml::org::predictor::Predictor* new_predictor = 
+            ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::Predictor >(
+            message_arena);
+      new_predictor->CopyFrom(**predictor);
+      *predictor = new_predictor;
+    }
+}
+void DatasetRequest::unsafe_arena_set_allocated_predictor(
+    ::carml::org::predictor::Predictor* predictor) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete predictor_;
+  }
+  predictor_ = predictor;
+  if (predictor) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.DatasetRequest.predictor)
+}
+void DatasetRequest::_slow_mutable_dataset() {
+  dataset_ = ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::DatasetRequest_Dataset >(
+      GetArenaNoVirtual());
+}
+::carml::org::predictor::DatasetRequest_Dataset* DatasetRequest::_slow_release_dataset() {
+  if (dataset_ == NULL) {
+    return NULL;
+  } else {
+    ::carml::org::predictor::DatasetRequest_Dataset* temp = new ::carml::org::predictor::DatasetRequest_Dataset(*dataset_);
+    dataset_ = NULL;
+    return temp;
+  }
+}
+::carml::org::predictor::DatasetRequest_Dataset* DatasetRequest::unsafe_arena_release_dataset() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.DatasetRequest.dataset)
+  
+  ::carml::org::predictor::DatasetRequest_Dataset* temp = dataset_;
+  dataset_ = NULL;
+  return temp;
+}
+void DatasetRequest::_slow_set_allocated_dataset(
+    ::google::protobuf::Arena* message_arena, ::carml::org::predictor::DatasetRequest_Dataset** dataset) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*dataset) == NULL) {
+      message_arena->Own(*dataset);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*dataset)) {
+      ::carml::org::predictor::DatasetRequest_Dataset* new_dataset = 
+            ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::DatasetRequest_Dataset >(
+            message_arena);
+      new_dataset->CopyFrom(**dataset);
+      *dataset = new_dataset;
+    }
+}
+void DatasetRequest::unsafe_arena_set_allocated_dataset(
+    ::carml::org::predictor::DatasetRequest_Dataset* dataset) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete dataset_;
+  }
+  dataset_ = dataset;
+  if (dataset) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.DatasetRequest.dataset)
+}
+void DatasetRequest::_slow_mutable_options() {
+  options_ = ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::PredictionOptions >(
+      GetArenaNoVirtual());
+}
+::carml::org::predictor::PredictionOptions* DatasetRequest::_slow_release_options() {
+  if (options_ == NULL) {
+    return NULL;
+  } else {
+    ::carml::org::predictor::PredictionOptions* temp = new ::carml::org::predictor::PredictionOptions(*options_);
+    options_ = NULL;
+    return temp;
+  }
+}
+::carml::org::predictor::PredictionOptions* DatasetRequest::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.DatasetRequest.options)
+  
+  ::carml::org::predictor::PredictionOptions* temp = options_;
+  options_ = NULL;
+  return temp;
+}
+void DatasetRequest::_slow_set_allocated_options(
+    ::google::protobuf::Arena* message_arena, ::carml::org::predictor::PredictionOptions** options) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*options) == NULL) {
+      message_arena->Own(*options);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*options)) {
+      ::carml::org::predictor::PredictionOptions* new_options = 
+            ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::PredictionOptions >(
+            message_arena);
+      new_options->CopyFrom(**options);
+      *options = new_options;
+    }
+}
+void DatasetRequest::unsafe_arena_set_allocated_options(
+    ::carml::org::predictor::PredictionOptions* options) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete options_;
+  }
+  options_ = options;
+  if (options) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.DatasetRequest.options)
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int DatasetRequest::kPredictorFieldNumber;
 const int DatasetRequest::kDatasetFieldNumber;
@@ -4637,6 +5604,14 @@ DatasetRequest::DatasetRequest()
   }
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.DatasetRequest)
+}
+DatasetRequest::DatasetRequest(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.DatasetRequest)
 }
 DatasetRequest::DatasetRequest(const DatasetRequest& from)
   : ::google::protobuf::Message(),
@@ -4674,11 +5649,23 @@ DatasetRequest::~DatasetRequest() {
 }
 
 void DatasetRequest::SharedDtor() {
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
   if (this != internal_default_instance()) delete predictor_;
   if (this != internal_default_instance()) delete dataset_;
   if (this != internal_default_instance()) delete options_;
 }
 
+void DatasetRequest::ArenaDtor(void* object) {
+  DatasetRequest* _this = reinterpret_cast< DatasetRequest* >(object);
+  (void)_this;
+}
+void DatasetRequest::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void DatasetRequest::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -4695,11 +5682,7 @@ const DatasetRequest& DatasetRequest::default_instance() {
 }
 
 DatasetRequest* DatasetRequest::New(::google::protobuf::Arena* arena) const {
-  DatasetRequest* n = new DatasetRequest;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<DatasetRequest>(arena);
 }
 
 void DatasetRequest::Clear() {
@@ -4946,6 +5929,21 @@ bool DatasetRequest::IsInitialized() const {
 
 void DatasetRequest::Swap(DatasetRequest* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    DatasetRequest* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void DatasetRequest::UnsafeArenaSwap(DatasetRequest* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void DatasetRequest::InternalSwap(DatasetRequest* other) {
@@ -4982,7 +5980,7 @@ const ::carml::org::predictor::Predictor& DatasetRequest::predictor() const {
 ::carml::org::predictor::Predictor* DatasetRequest::mutable_predictor() {
   
   if (predictor_ == NULL) {
-    predictor_ = new ::carml::org::predictor::Predictor;
+    _slow_mutable_predictor();
   }
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.DatasetRequest.predictor)
   return predictor_;
@@ -4990,12 +5988,22 @@ const ::carml::org::predictor::Predictor& DatasetRequest::predictor() const {
 ::carml::org::predictor::Predictor* DatasetRequest::release_predictor() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.DatasetRequest.predictor)
   
-  ::carml::org::predictor::Predictor* temp = predictor_;
-  predictor_ = NULL;
-  return temp;
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_predictor();
+  } else {
+    ::carml::org::predictor::Predictor* temp = predictor_;
+    predictor_ = NULL;
+    return temp;
+  }
 }
-void DatasetRequest::set_allocated_predictor(::carml::org::predictor::Predictor* predictor) {
-  delete predictor_;
+ void DatasetRequest::set_allocated_predictor(::carml::org::predictor::Predictor* predictor) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete predictor_;
+  }
+  if (predictor != NULL) {
+    _slow_set_allocated_predictor(message_arena, &predictor);
+  }
   predictor_ = predictor;
   if (predictor) {
     
@@ -5022,7 +6030,7 @@ const ::carml::org::predictor::DatasetRequest_Dataset& DatasetRequest::dataset()
 ::carml::org::predictor::DatasetRequest_Dataset* DatasetRequest::mutable_dataset() {
   
   if (dataset_ == NULL) {
-    dataset_ = new ::carml::org::predictor::DatasetRequest_Dataset;
+    _slow_mutable_dataset();
   }
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.DatasetRequest.dataset)
   return dataset_;
@@ -5030,12 +6038,22 @@ const ::carml::org::predictor::DatasetRequest_Dataset& DatasetRequest::dataset()
 ::carml::org::predictor::DatasetRequest_Dataset* DatasetRequest::release_dataset() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.DatasetRequest.dataset)
   
-  ::carml::org::predictor::DatasetRequest_Dataset* temp = dataset_;
-  dataset_ = NULL;
-  return temp;
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_dataset();
+  } else {
+    ::carml::org::predictor::DatasetRequest_Dataset* temp = dataset_;
+    dataset_ = NULL;
+    return temp;
+  }
 }
-void DatasetRequest::set_allocated_dataset(::carml::org::predictor::DatasetRequest_Dataset* dataset) {
-  delete dataset_;
+ void DatasetRequest::set_allocated_dataset(::carml::org::predictor::DatasetRequest_Dataset* dataset) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete dataset_;
+  }
+  if (dataset != NULL) {
+    _slow_set_allocated_dataset(message_arena, &dataset);
+  }
   dataset_ = dataset;
   if (dataset) {
     
@@ -5062,7 +6080,7 @@ const ::carml::org::predictor::PredictionOptions& DatasetRequest::options() cons
 ::carml::org::predictor::PredictionOptions* DatasetRequest::mutable_options() {
   
   if (options_ == NULL) {
-    options_ = new ::carml::org::predictor::PredictionOptions;
+    _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.DatasetRequest.options)
   return options_;
@@ -5070,12 +6088,22 @@ const ::carml::org::predictor::PredictionOptions& DatasetRequest::options() cons
 ::carml::org::predictor::PredictionOptions* DatasetRequest::release_options() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.DatasetRequest.options)
   
-  ::carml::org::predictor::PredictionOptions* temp = options_;
-  options_ = NULL;
-  return temp;
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_options();
+  } else {
+    ::carml::org::predictor::PredictionOptions* temp = options_;
+    options_ = NULL;
+    return temp;
+  }
 }
-void DatasetRequest::set_allocated_options(::carml::org::predictor::PredictionOptions* options) {
-  delete options_;
+ void DatasetRequest::set_allocated_options(::carml::org::predictor::PredictionOptions* options) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete options_;
+  }
+  if (options != NULL) {
+    _slow_set_allocated_options(message_arena, &options);
+  }
   options_ = options;
   if (options) {
     
@@ -5123,6 +6151,15 @@ Feature::Feature()
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.Feature)
 }
+Feature::Feature(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena),
+  metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.Feature)
+}
 Feature::Feature(const Feature& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -5131,7 +6168,8 @@ Feature::Feature(const Feature& from)
   metadata_.MergeFrom(from.metadata_);
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.name().size() > 0) {
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+    name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name(),
+      GetArenaNoVirtual());
   }
   ::memcpy(&index_, &from.index_,
     static_cast<size_t>(reinterpret_cast<char*>(&probability_) -
@@ -5153,9 +6191,21 @@ Feature::~Feature() {
 }
 
 void Feature::SharedDtor() {
-  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  name_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
 }
 
+void Feature::ArenaDtor(void* object) {
+  Feature* _this = reinterpret_cast< Feature* >(object);
+  (void)_this;
+}
+void Feature::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void Feature::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -5172,11 +6222,7 @@ const Feature& Feature::default_instance() {
 }
 
 Feature* Feature::New(::google::protobuf::Arena* arena) const {
-  Feature* n = new Feature;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<Feature>(arena);
 }
 
 void Feature::Clear() {
@@ -5186,7 +6232,7 @@ void Feature::Clear() {
   (void) cached_has_bits;
 
   metadata_.Clear();
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   ::memset(&index_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&probability_) -
       reinterpret_cast<char*>(&index_)) + sizeof(probability_));
@@ -5357,6 +6403,9 @@ void Feature::SerializeWithCachedSizes(
             items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
         ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
             4, *entry, output);
+        if (entry->GetArena() != NULL) {
+          entry.release();
+        }
         Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
       }
     } else {
@@ -5368,6 +6417,9 @@ void Feature::SerializeWithCachedSizes(
             it->first, it->second));
         ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
             4, *entry, output);
+        if (entry->GetArena() != NULL) {
+          entry.release();
+        }
         Utf8Check::Check(&*it);
       }
     }
@@ -5447,6 +6499,9 @@ void Feature::SerializeWithCachedSizes(
                    InternalWriteMessageNoVirtualToArray(
                        4, *entry, deterministic, target);
 ;
+        if (entry->GetArena() != NULL) {
+          entry.release();
+        }
         Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
       }
     } else {
@@ -5460,6 +6515,9 @@ void Feature::SerializeWithCachedSizes(
                    InternalWriteMessageNoVirtualToArray(
                        4, *entry, deterministic, target);
 ;
+        if (entry->GetArena() != NULL) {
+          entry.release();
+        }
         Utf8Check::Check(&*it);
       }
     }
@@ -5490,9 +6548,15 @@ size_t Feature::ByteSizeLong() const {
     for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
         it = this->metadata().begin();
         it != this->metadata().end(); ++it) {
+      if (entry.get() != NULL && entry->GetArena() != NULL) {
+        entry.release();
+      }
       entry.reset(metadata_.NewEntryWrapper(it->first, it->second));
       total_size += ::google::protobuf::internal::WireFormatLite::
           MessageSizeNoVirtual(*entry);
+    }
+    if (entry.get() != NULL && entry->GetArena() != NULL) {
+      entry.release();
     }
   }
 
@@ -5546,8 +6610,7 @@ void Feature::MergeFrom(const Feature& from) {
 
   metadata_.MergeFrom(from.metadata_);
   if (from.name().size() > 0) {
-
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+    set_name(from.name());
   }
   if (from.index() != 0) {
     set_index(from.index());
@@ -5577,6 +6640,21 @@ bool Feature::IsInitialized() const {
 
 void Feature::Swap(Feature* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    Feature* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void Feature::UnsafeArenaSwap(Feature* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void Feature::InternalSwap(Feature* other) {
@@ -5613,46 +6691,55 @@ void Feature::set_index(::google::protobuf::int64 value) {
 
 // string name = 2 [(.gogoproto.moretags) = "yaml:\"name,omitempty\""];
 void Feature::clear_name() {
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& Feature::name() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.Feature.name)
-  return name_.GetNoArena();
+  return name_.Get();
 }
 void Feature::set_name(const ::std::string& value) {
   
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.Feature.name)
 }
 #if LANG_CXX11
 void Feature::set_name(::std::string&& value) {
   
-  name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  name_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.Feature.name)
 }
 #endif
 void Feature::set_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.Feature.name)
 }
-void Feature::set_name(const char* value, size_t size) {
+void Feature::set_name(const char* value,
+    size_t size) {
   
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.Feature.name)
 }
 ::std::string* Feature::mutable_name() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.Feature.name)
-  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* Feature::release_name() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.Feature.name)
   
-  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* Feature::unsafe_arena_release_name() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.Feature.name)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void Feature::set_allocated_name(::std::string* name) {
   if (name != NULL) {
@@ -5660,8 +6747,21 @@ void Feature::set_allocated_name(::std::string* name) {
   } else {
     
   }
-  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.Feature.name)
+}
+void Feature::unsafe_arena_set_allocated_name(
+    ::std::string* name) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      name, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.Feature.name)
 }
 
 // float probability = 3 [(.gogoproto.moretags) = "yaml:\"probability,omitempty\""];
@@ -5735,6 +6835,16 @@ FeatureResponse::FeatureResponse()
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.FeatureResponse)
 }
+FeatureResponse::FeatureResponse(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena),
+  features_(arena),
+  metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.FeatureResponse)
+}
 FeatureResponse::FeatureResponse(const FeatureResponse& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -5744,15 +6854,18 @@ FeatureResponse::FeatureResponse(const FeatureResponse& from)
   metadata_.MergeFrom(from.metadata_);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.id().size() > 0) {
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id(),
+      GetArenaNoVirtual());
   }
   request_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.request_id().size() > 0) {
-    request_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.request_id_);
+    request_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.request_id(),
+      GetArenaNoVirtual());
   }
   input_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.input_id().size() > 0) {
-    input_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.input_id_);
+    input_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.input_id(),
+      GetArenaNoVirtual());
   }
   // @@protoc_insertion_point(copy_constructor:carml.org.predictor.FeatureResponse)
 }
@@ -5770,11 +6883,23 @@ FeatureResponse::~FeatureResponse() {
 }
 
 void FeatureResponse::SharedDtor() {
-  id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  request_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  input_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  id_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
+  request_id_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
+  input_id_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
 }
 
+void FeatureResponse::ArenaDtor(void* object) {
+  FeatureResponse* _this = reinterpret_cast< FeatureResponse* >(object);
+  (void)_this;
+}
+void FeatureResponse::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void FeatureResponse::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -5791,11 +6916,7 @@ const FeatureResponse& FeatureResponse::default_instance() {
 }
 
 FeatureResponse* FeatureResponse::New(::google::protobuf::Arena* arena) const {
-  FeatureResponse* n = new FeatureResponse;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<FeatureResponse>(arena);
 }
 
 void FeatureResponse::Clear() {
@@ -5806,9 +6927,9 @@ void FeatureResponse::Clear() {
 
   features_.Clear();
   metadata_.Clear();
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  request_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  input_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  request_id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  input_id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   _internal_metadata_.Clear();
 }
 
@@ -6009,6 +7130,9 @@ void FeatureResponse::SerializeWithCachedSizes(
             items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
         ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
             5, *entry, output);
+        if (entry->GetArena() != NULL) {
+          entry.release();
+        }
         Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
       }
     } else {
@@ -6020,6 +7144,9 @@ void FeatureResponse::SerializeWithCachedSizes(
             it->first, it->second));
         ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
             5, *entry, output);
+        if (entry->GetArena() != NULL) {
+          entry.release();
+        }
         Utf8Check::Check(&*it);
       }
     }
@@ -6119,6 +7246,9 @@ void FeatureResponse::SerializeWithCachedSizes(
                    InternalWriteMessageNoVirtualToArray(
                        5, *entry, deterministic, target);
 ;
+        if (entry->GetArena() != NULL) {
+          entry.release();
+        }
         Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
       }
     } else {
@@ -6132,6 +7262,9 @@ void FeatureResponse::SerializeWithCachedSizes(
                    InternalWriteMessageNoVirtualToArray(
                        5, *entry, deterministic, target);
 ;
+        if (entry->GetArena() != NULL) {
+          entry.release();
+        }
         Utf8Check::Check(&*it);
       }
     }
@@ -6173,9 +7306,15 @@ size_t FeatureResponse::ByteSizeLong() const {
     for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
         it = this->metadata().begin();
         it != this->metadata().end(); ++it) {
+      if (entry.get() != NULL && entry->GetArena() != NULL) {
+        entry.release();
+      }
       entry.reset(metadata_.NewEntryWrapper(it->first, it->second));
       total_size += ::google::protobuf::internal::WireFormatLite::
           MessageSizeNoVirtual(*entry);
+    }
+    if (entry.get() != NULL && entry->GetArena() != NULL) {
+      entry.release();
     }
   }
 
@@ -6232,16 +7371,13 @@ void FeatureResponse::MergeFrom(const FeatureResponse& from) {
   features_.MergeFrom(from.features_);
   metadata_.MergeFrom(from.metadata_);
   if (from.id().size() > 0) {
-
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    set_id(from.id());
   }
   if (from.request_id().size() > 0) {
-
-    request_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.request_id_);
+    set_request_id(from.request_id());
   }
   if (from.input_id().size() > 0) {
-
-    input_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.input_id_);
+    set_input_id(from.input_id());
   }
 }
 
@@ -6265,6 +7401,21 @@ bool FeatureResponse::IsInitialized() const {
 
 void FeatureResponse::Swap(FeatureResponse* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    FeatureResponse* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void FeatureResponse::UnsafeArenaSwap(FeatureResponse* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void FeatureResponse::InternalSwap(FeatureResponse* other) {
@@ -6288,46 +7439,55 @@ void FeatureResponse::InternalSwap(FeatureResponse* other) {
 
 // string id = 1 [(.gogoproto.customname) = "ID", (.gogoproto.jsontag) = "id,omitempty", (.gogoproto.moretags) = "yaml:\"id,omitempty\""];
 void FeatureResponse::clear_id() {
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& FeatureResponse::id() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.FeatureResponse.id)
-  return id_.GetNoArena();
+  return id_.Get();
 }
 void FeatureResponse::set_id(const ::std::string& value) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.FeatureResponse.id)
 }
 #if LANG_CXX11
 void FeatureResponse::set_id(::std::string&& value) {
   
-  id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  id_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.FeatureResponse.id)
 }
 #endif
 void FeatureResponse::set_id(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.FeatureResponse.id)
 }
-void FeatureResponse::set_id(const char* value, size_t size) {
+void FeatureResponse::set_id(const char* value,
+    size_t size) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.FeatureResponse.id)
 }
 ::std::string* FeatureResponse::mutable_id() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.FeatureResponse.id)
-  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* FeatureResponse::release_id() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.FeatureResponse.id)
   
-  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* FeatureResponse::unsafe_arena_release_id() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.FeatureResponse.id)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return id_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void FeatureResponse::set_allocated_id(::std::string* id) {
   if (id != NULL) {
@@ -6335,52 +7495,74 @@ void FeatureResponse::set_allocated_id(::std::string* id) {
   } else {
     
   }
-  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  id_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.FeatureResponse.id)
+}
+void FeatureResponse::unsafe_arena_set_allocated_id(
+    ::std::string* id) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (id != NULL) {
+    
+  } else {
+    
+  }
+  id_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      id, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.FeatureResponse.id)
 }
 
 // string request_id = 2 [(.gogoproto.customname) = "RequestID", (.gogoproto.jsontag) = "request_id,omitempty", (.gogoproto.moretags) = "yaml:\"request_id,omitempty\""];
 void FeatureResponse::clear_request_id() {
-  request_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  request_id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& FeatureResponse::request_id() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.FeatureResponse.request_id)
-  return request_id_.GetNoArena();
+  return request_id_.Get();
 }
 void FeatureResponse::set_request_id(const ::std::string& value) {
   
-  request_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  request_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.FeatureResponse.request_id)
 }
 #if LANG_CXX11
 void FeatureResponse::set_request_id(::std::string&& value) {
   
-  request_id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  request_id_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.FeatureResponse.request_id)
 }
 #endif
 void FeatureResponse::set_request_id(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  request_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  request_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.FeatureResponse.request_id)
 }
-void FeatureResponse::set_request_id(const char* value, size_t size) {
+void FeatureResponse::set_request_id(const char* value,
+    size_t size) {
   
-  request_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  request_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.FeatureResponse.request_id)
 }
 ::std::string* FeatureResponse::mutable_request_id() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.FeatureResponse.request_id)
-  return request_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return request_id_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* FeatureResponse::release_request_id() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.FeatureResponse.request_id)
   
-  return request_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return request_id_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* FeatureResponse::unsafe_arena_release_request_id() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.FeatureResponse.request_id)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return request_id_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void FeatureResponse::set_allocated_request_id(::std::string* request_id) {
   if (request_id != NULL) {
@@ -6388,52 +7570,74 @@ void FeatureResponse::set_allocated_request_id(::std::string* request_id) {
   } else {
     
   }
-  request_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), request_id);
+  request_id_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), request_id,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.FeatureResponse.request_id)
+}
+void FeatureResponse::unsafe_arena_set_allocated_request_id(
+    ::std::string* request_id) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (request_id != NULL) {
+    
+  } else {
+    
+  }
+  request_id_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      request_id, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.FeatureResponse.request_id)
 }
 
 // string input_id = 3 [(.gogoproto.customname) = "InputID", (.gogoproto.jsontag) = "input_id,omitempty", (.gogoproto.moretags) = "yaml:\"input_id,omitempty\""];
 void FeatureResponse::clear_input_id() {
-  input_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  input_id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& FeatureResponse::input_id() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.FeatureResponse.input_id)
-  return input_id_.GetNoArena();
+  return input_id_.Get();
 }
 void FeatureResponse::set_input_id(const ::std::string& value) {
   
-  input_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  input_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.FeatureResponse.input_id)
 }
 #if LANG_CXX11
 void FeatureResponse::set_input_id(::std::string&& value) {
   
-  input_id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  input_id_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.FeatureResponse.input_id)
 }
 #endif
 void FeatureResponse::set_input_id(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  input_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  input_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.FeatureResponse.input_id)
 }
-void FeatureResponse::set_input_id(const char* value, size_t size) {
+void FeatureResponse::set_input_id(const char* value,
+    size_t size) {
   
-  input_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  input_id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.FeatureResponse.input_id)
 }
 ::std::string* FeatureResponse::mutable_input_id() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.FeatureResponse.input_id)
-  return input_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return input_id_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* FeatureResponse::release_input_id() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.FeatureResponse.input_id)
   
-  return input_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return input_id_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* FeatureResponse::unsafe_arena_release_input_id() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.FeatureResponse.input_id)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return input_id_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void FeatureResponse::set_allocated_input_id(::std::string* input_id) {
   if (input_id != NULL) {
@@ -6441,8 +7645,21 @@ void FeatureResponse::set_allocated_input_id(::std::string* input_id) {
   } else {
     
   }
-  input_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), input_id);
+  input_id_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), input_id,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.FeatureResponse.input_id)
+}
+void FeatureResponse::unsafe_arena_set_allocated_input_id(
+    ::std::string* input_id) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (input_id != NULL) {
+    
+  } else {
+    
+  }
+  input_id_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      input_id, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.FeatureResponse.input_id)
 }
 
 // repeated .carml.org.predictor.Feature features = 4 [(.gogoproto.moretags) = "yaml:\"features,omitempty\""];
@@ -6510,6 +7727,15 @@ FeaturesResponse::FeaturesResponse()
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.FeaturesResponse)
 }
+FeaturesResponse::FeaturesResponse(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena),
+  responses_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.FeaturesResponse)
+}
 FeaturesResponse::FeaturesResponse(const FeaturesResponse& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -6518,7 +7744,8 @@ FeaturesResponse::FeaturesResponse(const FeaturesResponse& from)
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.id().size() > 0) {
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id(),
+      GetArenaNoVirtual());
   }
   // @@protoc_insertion_point(copy_constructor:carml.org.predictor.FeaturesResponse)
 }
@@ -6534,9 +7761,21 @@ FeaturesResponse::~FeaturesResponse() {
 }
 
 void FeaturesResponse::SharedDtor() {
-  id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  id_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
 }
 
+void FeaturesResponse::ArenaDtor(void* object) {
+  FeaturesResponse* _this = reinterpret_cast< FeaturesResponse* >(object);
+  (void)_this;
+}
+void FeaturesResponse::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void FeaturesResponse::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -6553,11 +7792,7 @@ const FeaturesResponse& FeaturesResponse::default_instance() {
 }
 
 FeaturesResponse* FeaturesResponse::New(::google::protobuf::Arena* arena) const {
-  FeaturesResponse* n = new FeaturesResponse;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<FeaturesResponse>(arena);
 }
 
 void FeaturesResponse::Clear() {
@@ -6567,7 +7802,7 @@ void FeaturesResponse::Clear() {
   (void) cached_has_bits;
 
   responses_.Clear();
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   _internal_metadata_.Clear();
 }
 
@@ -6751,8 +7986,7 @@ void FeaturesResponse::MergeFrom(const FeaturesResponse& from) {
 
   responses_.MergeFrom(from.responses_);
   if (from.id().size() > 0) {
-
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    set_id(from.id());
   }
 }
 
@@ -6776,6 +8010,21 @@ bool FeaturesResponse::IsInitialized() const {
 
 void FeaturesResponse::Swap(FeaturesResponse* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    FeaturesResponse* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void FeaturesResponse::UnsafeArenaSwap(FeaturesResponse* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void FeaturesResponse::InternalSwap(FeaturesResponse* other) {
@@ -6796,46 +8045,55 @@ void FeaturesResponse::InternalSwap(FeaturesResponse* other) {
 
 // string id = 1 [(.gogoproto.customname) = "ID", (.gogoproto.jsontag) = "id,omitempty", (.gogoproto.moretags) = "yaml:\"id,omitempty\""];
 void FeaturesResponse::clear_id() {
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& FeaturesResponse::id() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.FeaturesResponse.id)
-  return id_.GetNoArena();
+  return id_.Get();
 }
 void FeaturesResponse::set_id(const ::std::string& value) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.FeaturesResponse.id)
 }
 #if LANG_CXX11
 void FeaturesResponse::set_id(::std::string&& value) {
   
-  id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  id_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.FeaturesResponse.id)
 }
 #endif
 void FeaturesResponse::set_id(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.FeaturesResponse.id)
 }
-void FeaturesResponse::set_id(const char* value, size_t size) {
+void FeaturesResponse::set_id(const char* value,
+    size_t size) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.FeaturesResponse.id)
 }
 ::std::string* FeaturesResponse::mutable_id() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.FeaturesResponse.id)
-  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* FeaturesResponse::release_id() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.FeaturesResponse.id)
   
-  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* FeaturesResponse::unsafe_arena_release_id() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.FeaturesResponse.id)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return id_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void FeaturesResponse::set_allocated_id(::std::string* id) {
   if (id != NULL) {
@@ -6843,8 +8101,21 @@ void FeaturesResponse::set_allocated_id(::std::string* id) {
   } else {
     
   }
-  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  id_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.FeaturesResponse.id)
+}
+void FeaturesResponse::unsafe_arena_set_allocated_id(
+    ::std::string* id) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (id != NULL) {
+    
+  } else {
+    
+  }
+  id_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      id, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.FeaturesResponse.id)
 }
 
 // repeated .carml.org.predictor.FeatureResponse responses = 2 [(.gogoproto.moretags) = "yaml:\"responses,omitempty\""];
@@ -6881,6 +8152,53 @@ FeaturesResponse::responses() const {
 
 // ===================================================================
 
+void ResetRequest::_slow_mutable_predictor() {
+  predictor_ = ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::Predictor >(
+      GetArenaNoVirtual());
+}
+::carml::org::predictor::Predictor* ResetRequest::_slow_release_predictor() {
+  if (predictor_ == NULL) {
+    return NULL;
+  } else {
+    ::carml::org::predictor::Predictor* temp = new ::carml::org::predictor::Predictor(*predictor_);
+    predictor_ = NULL;
+    return temp;
+  }
+}
+::carml::org::predictor::Predictor* ResetRequest::unsafe_arena_release_predictor() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.ResetRequest.predictor)
+  
+  ::carml::org::predictor::Predictor* temp = predictor_;
+  predictor_ = NULL;
+  return temp;
+}
+void ResetRequest::_slow_set_allocated_predictor(
+    ::google::protobuf::Arena* message_arena, ::carml::org::predictor::Predictor** predictor) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*predictor) == NULL) {
+      message_arena->Own(*predictor);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*predictor)) {
+      ::carml::org::predictor::Predictor* new_predictor = 
+            ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::Predictor >(
+            message_arena);
+      new_predictor->CopyFrom(**predictor);
+      *predictor = new_predictor;
+    }
+}
+void ResetRequest::unsafe_arena_set_allocated_predictor(
+    ::carml::org::predictor::Predictor* predictor) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete predictor_;
+  }
+  predictor_ = predictor;
+  if (predictor) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.ResetRequest.predictor)
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ResetRequest::kIdFieldNumber;
 const int ResetRequest::kPredictorFieldNumber;
@@ -6894,6 +8212,14 @@ ResetRequest::ResetRequest()
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.ResetRequest)
 }
+ResetRequest::ResetRequest(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.ResetRequest)
+}
 ResetRequest::ResetRequest(const ResetRequest& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -6901,7 +8227,8 @@ ResetRequest::ResetRequest(const ResetRequest& from)
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.id().size() > 0) {
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id(),
+      GetArenaNoVirtual());
   }
   if (from.has_predictor()) {
     predictor_ = new ::carml::org::predictor::Predictor(*from.predictor_);
@@ -6923,10 +8250,22 @@ ResetRequest::~ResetRequest() {
 }
 
 void ResetRequest::SharedDtor() {
-  id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  id_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
   if (this != internal_default_instance()) delete predictor_;
 }
 
+void ResetRequest::ArenaDtor(void* object) {
+  ResetRequest* _this = reinterpret_cast< ResetRequest* >(object);
+  (void)_this;
+}
+void ResetRequest::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void ResetRequest::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -6943,11 +8282,7 @@ const ResetRequest& ResetRequest::default_instance() {
 }
 
 ResetRequest* ResetRequest::New(::google::protobuf::Arena* arena) const {
-  ResetRequest* n = new ResetRequest;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<ResetRequest>(arena);
 }
 
 void ResetRequest::Clear() {
@@ -6956,7 +8291,7 @@ void ResetRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   if (GetArenaNoVirtual() == NULL && predictor_ != NULL) {
     delete predictor_;
   }
@@ -7137,8 +8472,7 @@ void ResetRequest::MergeFrom(const ResetRequest& from) {
   (void) cached_has_bits;
 
   if (from.id().size() > 0) {
-
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    set_id(from.id());
   }
   if (from.has_predictor()) {
     mutable_predictor()->::carml::org::predictor::Predictor::MergeFrom(from.predictor());
@@ -7165,6 +8499,21 @@ bool ResetRequest::IsInitialized() const {
 
 void ResetRequest::Swap(ResetRequest* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    ResetRequest* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void ResetRequest::UnsafeArenaSwap(ResetRequest* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void ResetRequest::InternalSwap(ResetRequest* other) {
@@ -7185,46 +8534,55 @@ void ResetRequest::InternalSwap(ResetRequest* other) {
 
 // string id = 2 [(.gogoproto.customname) = "ID", (.gogoproto.jsontag) = "id,omitempty", (.gogoproto.moretags) = "yaml:\"id,omitempty\""];
 void ResetRequest::clear_id() {
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& ResetRequest::id() const {
   // @@protoc_insertion_point(field_get:carml.org.predictor.ResetRequest.id)
-  return id_.GetNoArena();
+  return id_.Get();
 }
 void ResetRequest::set_id(const ::std::string& value) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:carml.org.predictor.ResetRequest.id)
 }
 #if LANG_CXX11
 void ResetRequest::set_id(::std::string&& value) {
   
-  id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  id_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:carml.org.predictor.ResetRequest.id)
 }
 #endif
 void ResetRequest::set_id(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:carml.org.predictor.ResetRequest.id)
 }
-void ResetRequest::set_id(const char* value, size_t size) {
+void ResetRequest::set_id(const char* value,
+    size_t size) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  id_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:carml.org.predictor.ResetRequest.id)
 }
 ::std::string* ResetRequest::mutable_id() {
   
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.ResetRequest.id)
-  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* ResetRequest::release_id() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.ResetRequest.id)
   
-  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* ResetRequest::unsafe_arena_release_id() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.ResetRequest.id)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return id_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void ResetRequest::set_allocated_id(::std::string* id) {
   if (id != NULL) {
@@ -7232,8 +8590,21 @@ void ResetRequest::set_allocated_id(::std::string* id) {
   } else {
     
   }
-  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  id_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:carml.org.predictor.ResetRequest.id)
+}
+void ResetRequest::unsafe_arena_set_allocated_id(
+    ::std::string* id) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (id != NULL) {
+    
+  } else {
+    
+  }
+  id_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      id, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.ResetRequest.id)
 }
 
 // .carml.org.predictor.Predictor predictor = 1 [(.gogoproto.moretags) = "yaml:\"predictor,omitempty\""];
@@ -7253,7 +8624,7 @@ const ::carml::org::predictor::Predictor& ResetRequest::predictor() const {
 ::carml::org::predictor::Predictor* ResetRequest::mutable_predictor() {
   
   if (predictor_ == NULL) {
-    predictor_ = new ::carml::org::predictor::Predictor;
+    _slow_mutable_predictor();
   }
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.ResetRequest.predictor)
   return predictor_;
@@ -7261,12 +8632,22 @@ const ::carml::org::predictor::Predictor& ResetRequest::predictor() const {
 ::carml::org::predictor::Predictor* ResetRequest::release_predictor() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.ResetRequest.predictor)
   
-  ::carml::org::predictor::Predictor* temp = predictor_;
-  predictor_ = NULL;
-  return temp;
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_predictor();
+  } else {
+    ::carml::org::predictor::Predictor* temp = predictor_;
+    predictor_ = NULL;
+    return temp;
+  }
 }
-void ResetRequest::set_allocated_predictor(::carml::org::predictor::Predictor* predictor) {
-  delete predictor_;
+ void ResetRequest::set_allocated_predictor(::carml::org::predictor::Predictor* predictor) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete predictor_;
+  }
+  if (predictor != NULL) {
+    _slow_set_allocated_predictor(message_arena, &predictor);
+  }
   predictor_ = predictor;
   if (predictor) {
     
@@ -7280,6 +8661,53 @@ void ResetRequest::set_allocated_predictor(::carml::org::predictor::Predictor* p
 
 // ===================================================================
 
+void ResetResponse::_slow_mutable_predictor() {
+  predictor_ = ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::Predictor >(
+      GetArenaNoVirtual());
+}
+::carml::org::predictor::Predictor* ResetResponse::_slow_release_predictor() {
+  if (predictor_ == NULL) {
+    return NULL;
+  } else {
+    ::carml::org::predictor::Predictor* temp = new ::carml::org::predictor::Predictor(*predictor_);
+    predictor_ = NULL;
+    return temp;
+  }
+}
+::carml::org::predictor::Predictor* ResetResponse::unsafe_arena_release_predictor() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:carml.org.predictor.ResetResponse.predictor)
+  
+  ::carml::org::predictor::Predictor* temp = predictor_;
+  predictor_ = NULL;
+  return temp;
+}
+void ResetResponse::_slow_set_allocated_predictor(
+    ::google::protobuf::Arena* message_arena, ::carml::org::predictor::Predictor** predictor) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*predictor) == NULL) {
+      message_arena->Own(*predictor);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*predictor)) {
+      ::carml::org::predictor::Predictor* new_predictor = 
+            ::google::protobuf::Arena::CreateMessage< ::carml::org::predictor::Predictor >(
+            message_arena);
+      new_predictor->CopyFrom(**predictor);
+      *predictor = new_predictor;
+    }
+}
+void ResetResponse::unsafe_arena_set_allocated_predictor(
+    ::carml::org::predictor::Predictor* predictor) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete predictor_;
+  }
+  predictor_ = predictor;
+  if (predictor) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:carml.org.predictor.ResetResponse.predictor)
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ResetResponse::kPredictorFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -7291,6 +8719,14 @@ ResetResponse::ResetResponse()
   }
   SharedCtor();
   // @@protoc_insertion_point(constructor:carml.org.predictor.ResetResponse)
+}
+ResetResponse::ResetResponse(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_predictor_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:carml.org.predictor.ResetResponse)
 }
 ResetResponse::ResetResponse(const ResetResponse& from)
   : ::google::protobuf::Message(),
@@ -7316,9 +8752,21 @@ ResetResponse::~ResetResponse() {
 }
 
 void ResetResponse::SharedDtor() {
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
   if (this != internal_default_instance()) delete predictor_;
 }
 
+void ResetResponse::ArenaDtor(void* object) {
+  ResetResponse* _this = reinterpret_cast< ResetResponse* >(object);
+  (void)_this;
+}
+void ResetResponse::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void ResetResponse::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -7335,11 +8783,7 @@ const ResetResponse& ResetResponse::default_instance() {
 }
 
 ResetResponse* ResetResponse::New(::google::protobuf::Arena* arena) const {
-  ResetResponse* n = new ResetResponse;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<ResetResponse>(arena);
 }
 
 void ResetResponse::Clear() {
@@ -7508,6 +8952,21 @@ bool ResetResponse::IsInitialized() const {
 
 void ResetResponse::Swap(ResetResponse* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    ResetResponse* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void ResetResponse::UnsafeArenaSwap(ResetResponse* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void ResetResponse::InternalSwap(ResetResponse* other) {
@@ -7542,7 +9001,7 @@ const ::carml::org::predictor::Predictor& ResetResponse::predictor() const {
 ::carml::org::predictor::Predictor* ResetResponse::mutable_predictor() {
   
   if (predictor_ == NULL) {
-    predictor_ = new ::carml::org::predictor::Predictor;
+    _slow_mutable_predictor();
   }
   // @@protoc_insertion_point(field_mutable:carml.org.predictor.ResetResponse.predictor)
   return predictor_;
@@ -7550,12 +9009,22 @@ const ::carml::org::predictor::Predictor& ResetResponse::predictor() const {
 ::carml::org::predictor::Predictor* ResetResponse::release_predictor() {
   // @@protoc_insertion_point(field_release:carml.org.predictor.ResetResponse.predictor)
   
-  ::carml::org::predictor::Predictor* temp = predictor_;
-  predictor_ = NULL;
-  return temp;
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_predictor();
+  } else {
+    ::carml::org::predictor::Predictor* temp = predictor_;
+    predictor_ = NULL;
+    return temp;
+  }
 }
-void ResetResponse::set_allocated_predictor(::carml::org::predictor::Predictor* predictor) {
-  delete predictor_;
+ void ResetResponse::set_allocated_predictor(::carml::org::predictor::Predictor* predictor) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete predictor_;
+  }
+  if (predictor != NULL) {
+    _slow_set_allocated_predictor(message_arena, &predictor);
+  }
   predictor_ = predictor;
   if (predictor) {
     
