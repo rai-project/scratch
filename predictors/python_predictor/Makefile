@@ -44,6 +44,24 @@ predictor_pb2.py: ../predictor.proto ## Rule for producing the Python protobuf b
 		-I$(GOPATH)/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 		$<
 
+googleapis:
+	mkdir -p $(CURDIR)/python_predictor/gens
+	rm -fr $(CURDIR)/python_predictor/gens/google
+	git clone --depth=1 https://github.com/googleapis/googleapis
+	cd googleapis && \
+	make LANGUAGE=python && \
+	mv gens/google $(CURDIR)/python_predictor/gens/ && \
+	cd .. && \
+	rm -fr googleapis
+
+gogo:
+	mkdir -p $(CURDIR)/python_predictor/gens
+	rm -fr $(CURDIR)/python_predictor/gens/gogo
+	python3 -m grpc_tools.protoc \
+		--python_out=python_predictor/gens \
+		-I$(GOPATH)/src \
+		github.com/gogo/protobuf/gogoproto/gogo.proto
+
 
 clean-build: ## remove build artifacts
 	rm -fr build/
