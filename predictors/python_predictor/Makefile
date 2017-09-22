@@ -36,8 +36,8 @@ clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and 
 predictor_pb2.py: ../predictor.proto ## Rule for producing the Python protobuf bindings
 	mkdir -p predictor
 	python3 -m grpc_tools.protoc \
-		--python_out=predictor \
-		--grpc_python_out=predictor \
+		--python_out=python_predictor \
+		--grpc_python_out=python_predictor \
 		-I.. \
 		-I$(GOPATH)/src \
 		-I$(GOPATH)/src/github.com/golang/protobuf/proto \

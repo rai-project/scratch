@@ -22,7 +22,11 @@
   "files": [
     "dist"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "grpc": "^1.6.0",
+    "lodash": "^4.17.4"
+  },
   "devDependencies": {
     "all-contributors-cli": "^4.4.0",
     "babel-cli": "^6.26.0",
