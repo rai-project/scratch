@@ -131,6 +131,6 @@ func Init() {
 
 func main() {
 	Init()
-	defer tracer.Close()
+	defer tr.Close()
 	Example()
 }
