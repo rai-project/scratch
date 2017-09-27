@@ -1,13 +1,16 @@
 package main
 
 /*
-extern void go_callback_int(int foo, int p1);
+
+#include "stdlib.h"
+
+extern void go_callback_int(char * foo, int p1);
 
 // normally you will have to define function or variables
 // in another separate C file to avoid the multiple definition
 // errors, however, using "static inline" is a nice workaround
 // for simple functions like this one.
-static inline void CallMyFunction(int foo) {
+static inline void CallMyFunction(char * foo) {
 	go_callback_int(foo, 5);
 }
 */
@@ -15,11 +18,12 @@ import "C"
 import (
 	"fmt"
 	"sync"
+	"unsafe"
 )
 
 //export go_callback_int
-func go_callback_int(foo C.int, p1 C.int) {
-	fn := lookup(int(foo))
+func go_callback_int(foo *C.char, p1 C.int) {
+	fn := lookup(C.GoString(foo))
 	fn(p1)
 }
 
@@ -28,36 +32,34 @@ func MyCallback(x C.int) {
 }
 
 func Example() {
-	i := register(MyCallback)
-	C.CallMyFunction(C.int(i))
-	unregister(i)
+	name := register("MyCallback", MyCallback)
+	cstr := C.CString(name)
+	defer C.free(unsafe.Pointer(cstr))
+	C.CallMyFunction(cstr)
+	unregister(name)
 }
 
 var mu sync.Mutex
 var index int
-var fns = make(map[int]func(C.int))
+var fns = make(map[string]func(C.int))
 
-func register(fn func(C.int)) int {
+func register(name string, fn func(C.int)) string {
 	mu.Lock()
 	defer mu.Unlock()
-	index++
-	for fns[index] != nil {
-		index++
-	}
-	fns[index] = fn
-	return index
+	fns[name] = fn
+	return name
 }
 
-func lookup(i int) func(C.int) {
+func lookup(name string) func(C.int) {
 	mu.Lock()
 	defer mu.Unlock()
-	return fns[i]
+	return fns[name]
 }
 
-func unregister(i int) {
+func unregister(name string) {
 	mu.Lock()
 	defer mu.Unlock()
-	delete(fns, i)
+	delete(fns, name)
 }
 
 func main() {
