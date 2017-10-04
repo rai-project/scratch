@@ -28,7 +28,7 @@ import (
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/rai-project/config"
 	"github.com/rai-project/logger"
-	tr "github.com/rai-project/tracer"
+	"github.com/rai-project/tracer"
 	_ "github.com/rai-project/tracer/jaeger"
 	_ "github.com/rai-project/tracer/noop"
 	_ "github.com/rai-project/tracer/zipkin"
@@ -40,7 +40,6 @@ var (
 	IsVerbose bool
 	AppSecret string
 	CfgFile   string
-	tracer    tr.Tracer
 	log       *logrus.Entry = logrus.New().WithField("pkg", "scratch/tracepp-go")
 )
 
@@ -112,7 +111,6 @@ func Init() {
 	log.Level = logrus.DebugLevel
 	config.AfterInit(func() {
 		log = logger.New().WithField("pkg", "scratch/tracepp-go")
-		tracer = tr.MustNew("tracepp")
 		pp.Println(tracer.Endpoints())
 	})
 
@@ -131,6 +129,5 @@ func Init() {
 
 func main() {
 	Init()
-	defer tr.Close()
 	Example()
 }
