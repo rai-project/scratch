@@ -11,5 +11,5 @@ PyYAML==3.12
 pytest==3.2.3
 pytest-runner==2.12.1
 grpcio==1.6.3
-grpcio-tools==1.6.0
+grpcio-tools==1.6.3
 yapf==0.18.0
