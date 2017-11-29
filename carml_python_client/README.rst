@@ -31,38 +31,35 @@ Usage
 
 Go to the `carml_python_client` directory
 
-~~~
+``
 cd carml_python_client
-~~~
+``
 
 Then use the command line tool to perform the inference. For example
 
-~~~
+``
 python cli.py --carml_url impact2.csl.illinois.edu:9099 --urls example.txt
-~~~
+``
 
 You will have to make sure that carml is running on the specified url and port.
 
-Modify the `example.txt` file and place your URLs there.
+Modify the ``example.txt`` file and place your URLs there.
+
+Options
+-------
 
 The command line has options that allows you to pick the framework and model to use
 
-~~~
-$ python cli.py --help
-Usage: cli.py [OPTIONS]
 
-  Console script for carml_python_client.
+--carml_url TEXT          The URL to the CarML website.
+--urls FILENAME           The file containing all the urls to perform
+                        inference on.
+--framework_name TEXT     The framework to use for inference.
+--framework_version TEXT  The framework version to use for inference.
+--model_name TEXT         The model to use for inference.
+--model_version TEXT      The model version to use for inference.
+--help                    Show this message and exit.
 
-Options:
-  --carml_url TEXT          The URL to the CarML website.
-  --urls FILENAME           The file containing all the urls to perform
-                            inference on.
-  --framework_name TEXT     The framework to use for inference.
-  --framework_version TEXT  The framework version to use for inference.
-  --model_name TEXT         The model to use for inference.
-  --model_version TEXT      The model version to use for inference.
-  --help                    Show this message and exit.
-~~~
 
 Features
 --------
