@@ -49,7 +49,7 @@ def main(carml_url, urls, framework_name, framework_version, model_name, model_v
 
     urlReq = [{'id': str(uuid.uuid4()), 'data': url.decode("utf-8").strip()}
               for url in lines]
-    print(urlReq)
+    # print(urlReq)
 
     urlReq = requests.post(urlsAPIURL, json={
         'predictor': openResponseContent,
