@@ -10,11 +10,11 @@ import uuid
 
 
 @click.command()
-@click.option('--carml_url', default="impact2.csl.illinois.edu:9099", help='The URL to the CarML website.')
+@click.option('--carml_url', default="http://www.mlmodelscope.org", help='The URL to the CarML website.')
 @click.option('--urls', default='example.txt', type=click.File('rb'), help="The file containing all the urls to perform inference on.")
-@click.option('--framework_name', default='Caffe', help="The framework to use for inference.")
-@click.option('--framework_version', default='1.0', help="The framework version to use for inference.")
-@click.option('--model_name', default='SqueezeNet', help="The model to use for inference.")
+@click.option('--framework_name', default='MXNet', help="The framework to use for inference.")
+@click.option('--framework_version', default='0.11.0', help="The framework version to use for inference.")
+@click.option('--model_name', default="BVLC-AlexNet", help="The model to use for inference.")
 @click.option('--model_version', default='1.0', help="The model version to use for inference.")
 def main(carml_url, urls, framework_name, framework_version, model_name, model_version):
     """Console script for carml_python_client."""
@@ -34,12 +34,29 @@ def main(carml_url, urls, framework_name, framework_version, model_name, model_v
         'model_name': model_name,
         'model_version': model_version,
         'options': {
+            'batch_size': 1,
             'execution_options': {
-                'batch_size': 1,
-                'trace_level': "FULL_TRACE",
+                'trace_level': "STEP_TRACE",
             }
         }
     })
+    openReq.raise_for_status()
+
+    # b3Sampled = openReq.headers["X-B3-Sampled"]
+    # b3SpanId = openReq.headers["X-B3-Spanid"]
+    # b3TraceId = openReq.headers["X-B3-Traceid"]
+    # b3RequestId = openReq.headers["X-Request-Id"]
+
+    headers = {
+    "X-B3-Sampled": openReq.headers["X-B3-Sampled"],
+    "X-B3-Spanid": openReq.headers["X-B3-Spanid"],
+    "X-B3-Traceid":  openReq.headers["X-B3-Traceid"],
+    "X-Request-Id": openReq.headers["X-Request-Id"],
+
+    }
+
+    # print(openReq.headers)
+
     openResponseContent = openReq.json()
 
     predictorId = openResponseContent["id"]
@@ -57,11 +74,17 @@ def main(carml_url, urls, framework_name, framework_version, model_name, model_v
         'options': {
             'feature_limit': 0,
         }
-    })
+    },
+        headers=headers,
+    )
 
-    print(urlReq.json())
+    urlReq.raise_for_status()
 
-    requests.post(closeAPIURL, json={'id': predictorId})
+    print(urlReq.json()["responses"][0]["features"][:5])
+
+    requests.post(closeAPIURL, json={'id': predictorId}, headers=headers)
+
+    print("http://trace.mlmodelscope.org:16686/trace/" +  openReq.headers["X-B3-Traceid"])
 
 
 if __name__ == "__main__":
