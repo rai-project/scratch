@@ -21,7 +21,7 @@ import (
 	"time"
 	"unsafe"
 
-	context "golang.org/x/net/context"
+	context "context"
 
 	"github.com/fatih/color"
 	"github.com/k0kubun/pp"
