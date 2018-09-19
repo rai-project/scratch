@@ -58,6 +58,8 @@ The command line has options that allows you to pick the framework and model to 
 --framework_version TEXT  The framework version to use for inference.
 --model_name TEXT         The model to use for inference.
 --model_version TEXT      The model version to use for inference.
+--batch_size TEXT         The batch size to use for inference.
+--trace_level TEXT        The trace level to use for inference.
 --help                    Show this message and exit.
 
 

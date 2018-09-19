@@ -13,10 +13,12 @@ import uuid
 @click.option('--carml_url', default="http://www.mlmodelscope.org", help='The URL to the CarML website.')
 @click.option('--urls', default='example.txt', type=click.File('rb'), help="The file containing all the urls to perform inference on.")
 @click.option('--framework_name', default='MXNet', help="The framework to use for inference.")
-@click.option('--framework_version', default='0.11.0', help="The framework version to use for inference.")
+@click.option('--framework_version', default='1.3.0', help="The framework version to use for inference.")
 @click.option('--model_name', default="BVLC-AlexNet", help="The model to use for inference.")
 @click.option('--model_version', default='1.0', help="The model version to use for inference.")
-def main(carml_url, urls, framework_name, framework_version, model_name, model_version):
+@click.option('--batch_size', default='256', help="The batch size to use for inference.")
+@click.option('--trace_level', default='STEP_TRACE', help="The trace level to use for inference.")
+def main(carml_url, urls, framework_name, framework_version, model_name, model_version, batch_size, trace_level):
     """Console script for carml_python_client."""
     carml_url = carml_url.strip("/")
     if not carml_url.startswith("http"):
@@ -34,12 +36,12 @@ def main(carml_url, urls, framework_name, framework_version, model_name, model_v
         'model_name': model_name,
         'model_version': model_version,
         'options': {
-            'batch_size': 1,
+            'batch_size': batch_size,
             'execution_options': {
-                'trace_level': "STEP_TRACE",
+                'trace_level': trace_level,
             }
         }
-    })
+    }, allow_redirects=False)
     openReq.raise_for_status()
 
     # b3Sampled = openReq.headers["X-B3-Sampled"]
@@ -76,13 +78,14 @@ def main(carml_url, urls, framework_name, framework_version, model_name, model_v
         }
     },
         headers=headers,
+        allow_redirects=False,
     )
 
     urlReq.raise_for_status()
 
-    print(urlReq.json()["responses"][0]["features"][:5])
+    # print(urlReq.json()["responses"][0]["features"][:5])
 
-    requests.post(closeAPIURL, json={'id': predictorId}, headers=headers)
+    requests.post(closeAPIURL, json={'id': predictorId}, headers=headers, allow_redirects=False)
 
     print("http://trace.mlmodelscope.org:16686/trace/" +  openReq.headers["X-B3-Traceid"])
 
