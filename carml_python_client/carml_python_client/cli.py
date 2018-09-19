@@ -7,7 +7,7 @@ import requests
 import chalk
 import json
 import uuid
-
+from urllib.request import urlopen
 
 
 
@@ -96,7 +96,11 @@ def main(carml_url, urls, framework_name, framework_version, model_name, model_v
 
     requests.post(closeAPIURL, json={'id': predictorId}, headers=headers, allow_redirects=False)
 
-    print( trace_url + ":16686/trace/" +  openReq.headers["X-B3-Traceid"])
+    url = trace_url + ":16686/api/traces/" +  openReq.headers["X-B3-Traceid"]
+    print(url)
+    res = urlopen(url)
+    data = res.read()
+    open(model_name + '_' + framework_name+'_'+framework_version+'_'+trace_level+'_'+str(batch_size)+'.json', 'wb').write(data)
 
 
 if __name__ == "__main__":
