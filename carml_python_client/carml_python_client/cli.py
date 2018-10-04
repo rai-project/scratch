@@ -7,6 +7,7 @@ import requests
 import chalk
 import json
 import uuid
+import time
 from urllib.request import urlopen
 
 
@@ -59,12 +60,13 @@ def main(carml_url, urls, framework_name, framework_version, model_name, model_v
     # b3TraceId = openReq.headers["X-B3-Traceid"]
     # b3RequestId = openReq.headers["X-Request-Id"]
 
-    headers = {
-        "X-B3-Sampled": openReq.headers["X-B3-Sampled"],
-        "X-B3-Spanid": openReq.headers["X-B3-Spanid"],
-        "X-B3-Traceid":  openReq.headers["X-B3-Traceid"],
-        "X-Request-Id": openReq.headers["X-Request-Id"],
-    }
+    # headers = {
+    #     "X-B3-Sampled": openReq.headers["X-B3-Sampled"],
+    #     "X-B3-Spanid": openReq.headers["X-B3-Spanid"],
+    #     "X-B3-Traceid":  openReq.headers["X-B3-Traceid"],
+    #     "X-Request-Id": openReq.headers["X-Request-Id"],
+    # }
+    headers = {}
 
     # print(openReq.headers)
 
@@ -92,12 +94,16 @@ def main(carml_url, urls, framework_name, framework_version, model_name, model_v
 
     urlReq.raise_for_status()
 
+    urlsRes = urlReq.json()
+    traceId = urlsRes["trace_id"]["id"]
+    #print(traceId)
     # print(urlReq.json()["responses"][0]["features"][:5])
 
-    requests.post(closeAPIURL, json={'id': predictorId}, headers=headers, allow_redirects=False)
+    #requests.post(closeAPIURL, json={'id': predictorId}, headers=headers, allow_redirects=False)
 
-    url = trace_url + ":16686/api/traces/" +  openReq.headers["X-B3-Traceid"]
+    url = trace_url + ":16686/api/traces/" +  traceId
     print(url)
+    time.sleep(2)
     res = urlopen(url)
     data = res.read()
     open(model_name + '_' + framework_name+'_'+framework_version+'_'+trace_level+'_'+str(batch_size)+'.json', 'wb').write(data)
